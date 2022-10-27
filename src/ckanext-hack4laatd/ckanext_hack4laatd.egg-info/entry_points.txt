@@ -1,0 +1,7 @@
+
+        [ckan.plugins]
+        hack4laatd=ckanext.hack4laatd.plugin:Hack4LaatdPlugin
+
+        [babel.extractors]
+        ckan = ckan.lib.extract:extract_ckan
+    

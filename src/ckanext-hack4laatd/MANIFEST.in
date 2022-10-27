@@ -1,0 +1,5 @@
+include README.rst
+include LICENSE
+include requirements.txt
+recursive-include ckanext/hack4laatd *.html *.json *.js *.less *.css *.mo *.yml
+recursive-include ckanext/hack4laatd/migration *.ini *.py *.mako

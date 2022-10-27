@@ -1,0 +1,14 @@
+# hack4laatd-js:
+#   filter: rjsmin
+#   output: ckanext-hack4laatd/%(version)s-hack4laatd.js
+#   contents:
+#     - js/hack4laatd.js
+#   extra:
+#     preload:
+#       - base/main
+
+# hack4laatd-css:
+#   filter: cssrewrite
+#   output: ckanext-hack4laatd/%(version)s-hack4laatd.css
+#   contents:
+#     - css/hack4laatd.css
