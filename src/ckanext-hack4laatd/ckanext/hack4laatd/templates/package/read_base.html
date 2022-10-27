@@ -1,0 +1,103 @@
+{% ckan_extends %}
+
+{% block bodytag %} {{ super() }} class="dataset"{% endblock %}
+
+{% set pkg_dict = pkg %}
+{% block secondary_content %}
+
+  {% block package_publisher %}
+    <section class="publisher button-box">
+      <p>
+        {{ _('Published by') }}
+        <a href="{{ h.url_for('organization_read', id=pkg.organization.name) }}">
+          {{ h.get_organization_display_title(pkg.organization) }}
+        </a>
+      </p>
+      {% if pkg.harvest_dataset_url %}
+        <a class="btn" href="{{ pkg.harvest_dataset_url }}" target="_blank">{{ _('Go to data source') }}</a>
+        {% if pkg.harvest_timestamp %}
+        <span>
+            Harvested on {% snippet 'snippets/local_friendly_datetime.html', datetime_obj=pkg.harvest_timestamp %}
+        </span>
+        {% endif %}
+
+      {% endif %}
+    </section>
+  {% endblock %}
+
+  {% block package_license %}
+    {% snippet "snippets/license.html", pkg_dict=pkg %}
+  {% endblock %}
+
+  {% block package_stories %}
+    {% set stories = h.get_package_stories(pkg.name) %}
+    <section class="module module-narrow">
+      <h2 class="module-heading">{{ _('Stories that reference this dataset') }}</h2>
+      <ul class="dataset-list">
+        {% if stories %}
+          {% for story in stories %}
+            <li>
+              <a href="{{ h.url_for('ckanext_showcase_read', id=story.name) }}">{{ story.title }}</a>
+            </li>
+          {% endfor %}
+        {% else %}
+          <li class="suggest-empty">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScarqwpnuqZhr7GgqxBFyZOK-eTDE5egkd3YSxmfntAVul3vg/viewform" target="_blank">Suggest a story</a>
+          </li>
+        {% endif %}
+      </ul>
+    </section>
+  {% endblock %}
+
+  {% block package_datasets %}
+    {% set related_datasets = h.get_related_datasets_for_display(pkg.get('related_datasets', [])) %}
+    {% if related_datasets %}
+      <section class="module module-narrow">
+        <h2 class="module-heading"> {{ _('Linked datasets') }}</h2>
+        <ul class="dataset-list">
+        {% for package in related_datasets %}
+          <li>{{ h.link_to(h.truncate(package.text, 80), package.href) }}</li>
+        {% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+  {% endblock %}
+
+  {% block package_topics %}
+    {% set groups = pkg.groups %}
+    <section class="module module-narrow">
+      <h2 class="module-heading">{{ _('Find related datasets') }}</h2>
+      <ul class="tag-list">
+        {% if groups %}
+          {% for group in groups %}
+            <li class="{{ group.name }}">
+              <a class="tag" href="{{ h.url_for(controller='package', action='search', groups=group.name) }}">
+                {{ h.truncate(group.display_name, 22) }}
+              </a>
+            </li>
+          {% endfor %}
+        {% else %}
+            <li>
+              {# TODO: actual link is not decided #}
+              <a class="tag" href="{{ h.url_for(controller='package', action='search', type_label='Data') }}">
+                All topics
+              </a>
+            </li>
+        {% endif %}
+      </ul>
+    </section>
+  {% endblock %}
+
+{% endblock %}
+
+{% block primary_content %}
+    {% block page_header %}
+    {% endblock %}
+      {% if self.page_primary_action() | trim %}
+        <div class="page_primary_action">
+          {% block page_primary_action %}{% endblock %}
+        </div>
+      {% endif %}
+      {% block primary_content_inner %}
+      {% endblock %}
+{% endblock %}

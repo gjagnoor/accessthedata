@@ -1,0 +1,12 @@
+{% ckan_extends %} {% block header_account_settings_link %} {{ super() }}
+<li>
+  <a href="/harvest" title="{{ _('Harvesting') }}">
+    <i class="fa fa-download" aria-hidden="true"></i>
+    <span class="text">{{ _('Harvesting') }}</span>
+  </a>
+</li>
+{% endblock %} {% block header_site_navigation_tabs %} {{ h.build_nav_main(
+('dataset_search', _('Library')), ('topic_index', _('Topics')),
+('publisher_index', _('Publishers')), ('blog_search', _('Blog')), ('aboutus',
+_('About')), ('getinvolved', _('Get Involved')), ) }} {% endblock %} {% block
+header_site_search %}{% endblock %}

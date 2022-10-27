@@ -1,0 +1,29 @@
+{% ckan_extends %} {% import 'macros/form.html' as form %} {% block admin_form
+%} {{ super() }} {{ form.input('ckanext.hack4laatd.trending_min',
+id='field-ckanext.hack4laatd.trending_min', label=_('Minimum views for
+trending'), value=data['ckanext.hack4laatd.trending_min'],
+error=errors['ckanext.hack4laatd.trending_min']) }} {{
+form.textarea('ckanext.hack4laatd.editable_regions',
+id='field-ckanext.hack4laatd.editable_regions', label=_('Editable regions'),
+value=data['ckanext.hack4laatd.editable_regions'],
+error=errors['ckanext.hack4laatd.editable_regions']) }} {% set field_url =
+'ckanext.hack4laatd.featured_image' %} {% set is_upload = data[field_url] and
+not data[field_url].startswith('http') %} {% set is_url = data[field_url] and
+data[field_url].startswith('http') %} {{ form.image_upload(data, errors,
+is_upload_enabled=h.uploads_enabled(), is_url=is_url, is_upload=is_upload,
+upload_label = _('Featured image'), url_label=_('Featured image'),
+field_url=field_url, field_upload='featured_image_upload',
+field_clear='clear_featured_image_upload' )}} {% endblock %} {% block
+admin_form_help %} {{ super() }}
+
+<p>
+  <strong>Minimum views for trending:</strong> Number of views for the last week
+  required to mark a dataset as trending
+</p>
+<p>
+  <strong>Featured image:</strong> Featured image on the home page. Recommended
+  size is 1000 x 600 px
+</p>
+<p><strong>Editable regions:</strong> Editable regions contents.</p>
+
+{% endblock %}

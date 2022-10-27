@@ -1,0 +1,76 @@
+{
+  "scheming_version": 1,
+  "organization_type": "publisher",
+  "about": "CKAN organization schema customized for the Access The Data project",
+  "about_url": "http://github.com/gjagnoor/accessthedata",
+  "fields": [
+    {
+      "field_name": "name",
+      "form_placeholder": "eg. my-publisher",
+      "label": "URL",
+      "preset": "group_or_org_slug"
+    },
+    {
+      "field_name": "display_title",
+      "form_placeholder": "eg. City of Lakewood",
+      "label": "Title",
+      "preset": "title",
+      "required": true
+    },
+    {
+      "field_name": "title",
+      "form_placeholder": "eg. Lakewood, City of",
+      "label": "Title for listings",
+      "validators": "set_default_publisher_title"
+    },
+    {
+      "field_name": "description",
+      "form_placeholder": "eg. Some useful notes about the publisher",
+      "form_snippet": "markdown.html",
+      "label": "Description"
+    },
+    {
+      "field_name": "publisher_type",
+      "help_text": "Type of the publisher to add",
+      "label": "Publisher type",
+      "preset": "select",
+      "choices": [
+        {
+          "label": "Federal",
+          "value": "federal"
+        },
+        {
+          "label": "State",
+          "value": "state"
+        },
+        {
+          "label": "Regional",
+          "value": "regional"
+        },
+        {
+          "label": "City",
+          "value": "city"
+        },
+        {
+          "label": "County",
+          "value": "county"
+        },
+        {
+          "label": "Private",
+          "value": "private"
+        },
+        {
+          "label": "Non profit",
+          "value": "nonprofit"
+        }
+      ]
+    },
+    {
+      "field_name": "not_used",
+      "label": "Parent",
+      "display_snippet": null,
+      "form_snippet": "org_hierarchy.html",
+      "validators": "ignore_missing"
+    }
+  ]
+}

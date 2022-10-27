@@ -1,0 +1,55 @@
+<div class="pre-footer-connectivity container">
+    {% snippet 'snippets/connectivity.html' %}
+  </div>
+  {% snippet 'snippets/community.html' %}
+
+  <a href="#" class="to-top">
+    <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    <span class="text"><span class="sr-only">{{ _('Go back to') }} </span><span>{{ _('top') }}</span></span>
+  </a>
+
+  <footer class="site-footer">
+    <div class="container">
+      <a class="logo" href="{{ h.url_for('home.index') }}"><img src="{% url_for_static '/base/images/la-counts-logo.png' %}" alt="{{ g.site_title }}" title="{{ g.site_title }}" /></a>
+      <div class="footer-content">
+        <address>
+          1000. N. Alameda Street, Suite 420 <br/>
+          Los Angeles, CA 90012<br/>
+          Access The Data is a project of <a target="_blank" rel="noopener noreferrer" href="http://www.communitypartners.org">Community Partners</a><br/>
+        </address>
+        <nav>
+          <a href="{{ h.url_for('aboutus') }}">{{ _('About') }}</a>
+          <a href="{{ h.url_for(controller='ckanext.contact.controllers.contact:ContactController', action='form') }}">{{ _('Contact Us') }}</a>
+        </nav>
+        <nav>
+          <a href="{{ h.url_for(controller='ckanext.hack4laatd.controller:StaticController', action='faqs') }}">{{ _('FAQs') }}</a>
+          <a href="{{ h.url_for(controller='ckanext.hack4laatd.controller:StaticController', action='resources') }}">{{ _('Resources') }}</a>
+        </nav>
+        <nav>
+          <a href="{{ h.url_for(controller='ckanext.hack4laatd.controller:StaticController', action='termsofservice') }}">{{ _('Terms of Service') }}</a>
+          <a href="{{ h.url_for(controller='ckanext.hack4laatd.controller:StaticController', action='privacypolicy') }}">{{ _('Privacy Policy') }}</a>
+        </nav>
+        <div>
+          <ul class="platforms">
+            <li>
+              <a href="https://github.com/okfn/ckanext-hack4laatd" target="_blank"><i class="fa fa-github-square" aria-hidden="true"></i><span class="sr-only">Github</span></a>
+            </li>
+            <li>
+              <a href="https://twitter.com/LA_COUNTS" target="_blank"><i class="fa fa-twitter-square" aria-hidden="true"></i><span class="sr-only">Twitter</span></a>
+            </li>
+          </ul>
+          <p>
+            ©2020 Access The Data
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    {% block footer_debug %}
+      {% if g.debug %}
+        {% include 'snippets/debug.html' %}
+      {% endif %}
+    {% endblock %}
+  </footer>
+</div>

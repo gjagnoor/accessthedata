@@ -1,0 +1,17 @@
+{% import 'macros/editable.html' as editable with context %}
+
+<section class="data-stories">
+  {% call editable.region('data-stories') %}
+  <h1>Recent data stories</h1>
+  <p>
+    Data stories help to illuminate the power of open data. Access The Data
+    features 5 types of stories: data stories; data visualizations; profiles and
+    interviews; methodologies; and white papers and research.
+  </p>
+  {% endcall %} {% set stories = h.get_recent_data_stories(limit=4) %} {%
+  snippet 'snippets/stories_list.html', stories=stories %}
+
+  <a href="{{ h.url_for('dataset', type_label='Story') }}" class="explore-link"
+    >View all stories</a
+  >
+</section>

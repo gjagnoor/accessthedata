@@ -1,0 +1,62 @@
+{% ckan_extends %}
+
+{% block resource_item_title %}
+  <a class="format-label" href="{{ url }}" title="{{ res.name or res.description }}" property="dc:format" data-format="{{ res.format.lower() or 'data' }}">
+    {{ h.get_translated(res, 'format') }}
+  </a>
+  <div>
+    <a class="heading" href="{{ url }}" title="{{ res.name or res.description }}">
+      {{ h.resource_display_name(res) | truncate(50) }}
+    </a>
+    {% if res.description %}
+      <p class="description">
+        {{ h.markdown_extract(h.get_translated(res, 'description'), extract_length=80) }}
+      </p>
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block resource_item_description %}{% endblock %}
+
+{% block resource_item_explore %}
+  {% if not url_is_edit %}
+
+  <ul class="explore">
+    {% block resource_item_explore_links %}
+    <li>
+      <a href="{{ url }}" data-label="{% if res.has_views %}{{ _('Preview') }}{% else %}{{ _('More information') }}{% endif %}">
+        {% if res.has_views %}
+          <i class="fa fa-table"></i>
+          <span class="text">{{ _('Preview') }}</span>
+        {% else %}
+          <i class="fa fa-info"></i>
+          <span class="text">{{ _('More information') }}</span>
+        {% endif %}
+      </a>
+    </li>
+    {% if res.url and h.is_url(res.url) %}
+    <li>
+      <a href="{{ res.url }}" class="resource-url-analytics" target="_blank" data-label="{% if res.has_views or res.url_type == 'upload' %}{{ _('Download') }}{% else %}{{ _('Go to resource') }}{% endif %}">
+        {% if res.has_views or res.url_type == 'upload' %}
+          <i class="fa fa-arrow-down"></i>
+          <span class="text">{{ _('Download') }}</span>
+        {% else %}
+          <i class="fa fa-link"></i>
+          <span class="text">{{ _('Go to resource') }}</span>
+        {% endif %}
+      </a>
+    </li>
+    {% endif %}
+    {% if can_edit %}
+    <li>
+      <a href="{{ h.url_for('resource.edit', id=pkg.name, resource_id=res.id) }}" data-label="{{ _('Edit') }}">
+        <i class="fa fa-pencil"></i>
+        <span class="text">{{ _('Edit') }}</span>
+      </a>
+    </li>
+    {% endif %}
+    {% endblock %}
+  </ul>
+
+  {% endif %}
+  {% endblock %}

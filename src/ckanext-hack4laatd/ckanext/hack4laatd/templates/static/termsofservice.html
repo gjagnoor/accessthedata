@@ -1,0 +1,159 @@
+{% extends "page.html" %} {% import 'macros/editable.html' as editable with
+context %} {% block subtitle %}{{ _('Terms of Service') }}{% endblock %} {%
+block breadcrumb_content %}
+<li class="active">
+  {% link_for _('Terms of Service'),
+  controller='ckanext.hack4laatd.controller:StaticController',
+  action='termsofservice' %}
+</li>
+{% endblock %} {% block primary_content %} {% call
+editable.region('terms-of-service') %}
+<h1>Terms of Service</h1>
+
+<h2>Acceptance Of Terms</h2>
+<p>
+  Access The Data provides the information on this Web Site as provided in these
+  Terms of Service ("TOS"). Access The Data may update the TOS at any time and
+  without prior notice by posting a new version at http://hack4laatd.org/terms.
+  The information on this site and your use of it is subject to the most recent
+  version of the TOS posted. By accessing or using the Access The Data Service,
+  you agree to be bound by these Terms of Use and also by our {% link_for
+  _('Privacy Policy'),
+  controller='ckanext.hack4laatd.controller:StaticController',
+  action='privacypolicy' %}.
+</p>
+
+<h2>Description Of Service</h2>
+<p>
+  Access The Data is a platform for accessing publicly available data about Los
+  Angeles County. Access The Data exists to make data about the region as
+  accessible, transparent and accountable as possible among a variety of other
+  services. Unless explicitly stated otherwise, any new features that augment or
+  enhance the current Access The Data Service shall be subject to the TOS.
+</p>
+
+<h2>Disclaimers</h2>
+<p>
+  Information on this site is provided on an "as is" and "as available" basis.
+  Access The Data makes every effort to ensure, but does not guarantee, the
+  accuracy or completeness of the information on the Access The Data website(s).
+  Our goal is to keep this information timely and accurate. If errors are
+  brought to our attention, we will try to correct them.
+</p>
+
+<p>
+  Access The Data may add, change, improve, or update the information of the
+  website without notice. Access The Data reserves its exclusive right in its
+  sole discretion to alter, limit or discontinue part of this site.
+</p>
+
+<p>
+  Under no circumstances shall LA counts be liable for any loss, damage,
+  liability or expense suffered which is claimed to result from use of this
+  site, including without limitation, any fault, error, omission, interruption
+  or delay. Use of this site is at User's sole risk.
+</p>
+
+<h2>Content Made Available For Inclusion on the Access The Data Service</h2>
+<p>
+  Access The Data does not claim ownership of Content you submit or make
+  available for inclusion via the Access The Data Service. However, with respect
+  to Content you submit or make available for inclusion on the publicly
+  available Access The Data Service, you irrevocably grant Access The Data the
+  perpetual, worldwide, royalty-free and non-exclusive license, with the right
+  to sublicense through multiple tiers of sublicensees, to use, distribute,
+  reproduce, modify, adapt, publicly perform and publicly display such Content,
+  in whole or in part, on the Access The Data Service or other publications by
+  Access The Data in any media whether now existing or which come into the
+  existence into the future and to provide that information under the license
+  set forth on the initial page of the http://hack4laatd.org/ Web site. And for
+  Content you submit for private discussions, you grant Access The Data the
+  worldwide, royalty-free and non-exclusive license to use, distribute,
+  reproduce, modify, adapt, publicly perform and publicly display such Content
+  on the associated private discussion group.
+</p>
+
+<h2>Indemnity</h2>
+<p>
+  You agree to indemnify and hold Access The Data and its subsidiaries,
+  affiliates, officers, agents, employees, partners and licensors harmless from
+  any claim or demand, including but not limited to reasonable attorneys' fees,
+  made by any third party due to or arising out of Content you submit, post,
+  transmit or otherwise make available through the Service, your use of the
+  Access The Data Service, your connection to the Service, your violation of the
+  TOS, or your violation of any rights of another.
+</p>
+
+<h2>Modifications TO Access The Data Service</h2>
+<p>
+  You acknowledge that Access The Data may establish general practices and
+  limits concerning use of the Access The Data Service, including without
+  limitation the maximum number of days that email messages, message board
+  postings or other uploaded Content will be retained by the Access The Data
+  Service. You further acknowledge that Access The Data reserves the right to
+  modify these general practices and limits from time to time. Access The Data
+  reserves the right at any time and from time to time to modify or discontinue,
+  temporarily or permanently, the Access The Data Service (or any part thereof)
+  with or without notice. You agree that Access The Data shall not be liable to
+  you or to any third party for any modification, suspension or discontinuance
+  of the Access The Data Service.
+</p>
+
+<h2>Links</h2>
+<p>
+  The Access The Data Service may provide, or third parties may provide, links
+  to other World Wide Web sites or resources. Because Access The Data has no
+  control over such sites and resources, you acknowledge and agree that Access
+  The Data is not responsible for the availability of such external sites or
+  resources, and does not endorse and is not responsible or liable for any
+  Content, advertising, products or other materials on or available from such
+  sites or resources. You further acknowledge and agree that Access The Data
+  shall not be responsible or liable, directly or indirectly, for any damage or
+  loss caused or alleged to be caused by or in connection with use of or
+  reliance on any such Content, goods or services available on or through any
+  such site or resource.
+</p>
+
+<h2>Notice and Procedure for Making Claims of Copyright Infringement</h2>
+<p>
+  Access The Data respects the copyright of others, and we ask our users to do
+  the same. Access The Data may, in appropriate circumstances and at its
+  discretion, disable and/or terminate the access of users who may be repeat
+  infringers. If you believe that your work has been copied in a way that
+  constitutes copyright infringement, please provide Access The Data' with the
+  following information: an electronic or physical signature of the person
+  authorized to act on behalf of the owner of the copyright; a description of
+  the copyrighted work that you claim has been infringed; a description of where
+  the material that you claim is infringing is located on the site; your
+  address, telephone number, and email address; a statement by you that you have
+  a good faith belief that the disputed use is not authorized by the copyright
+  owner, its agent, or the law; a statement by you, made under penalty of
+  perjury, that the above information in your Notice is accurate and that you
+  are the copyright owner or authorized to act on the copyright owner's behalf.
+</p>
+
+<h2>General Information</h2>
+<p>
+  Entire Agreement. The TOS constitutes the entire agreement between you and LA
+  Counts and governs your use of the Access The Data Service, superseding any
+  prior agreements between you and Access The Data with respect to the Access
+  The Data Service.
+</p>
+
+<p>
+  Choice of Law and Forum. The TOS and the relationship between you and LA
+  Counts shall be governed by the laws of the State of California without regard
+  to its conflict of law provisions. You and Access The Data agree to submit to
+  the personal and exclusive jurisdiction of the courts located within the
+  county of Los Angeles, California.
+</p>
+
+<p>
+  Waiver and Severability of Terms. The failure of Access The Data to exercise
+  or enforce any right or provision of the TOS shall not constitute a waiver of
+  such right or provision. If any provision of the TOS is found by a court of
+  competent jurisdiction to be invalid, the parties nevertheless agree that the
+  court should endeavor to give effect to the parties' intentions as reflected
+  in the provision, and the other provisions of the TOS remain in full force and
+</p>
+{% endcall %} {% endblock %} {% block secondary %}{% endblock %}

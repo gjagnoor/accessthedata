@@ -1,0 +1,137 @@
+.form-horizontal .form-group {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form-control,
+.select2-container .select2-choice,
+input.search-input {
+  font-size: 1em;
+  color: var(--body-colour);
+  border: 2px solid var(--border-colour);
+  border-radius: var(--border-radius);
+  box-shadow: none;
+  transition: border-color ease-in-out .15s;
+  padding: 0.5em 1.1em;
+  height: auto;
+  background-image: none;
+
+  &:focus {
+    border-color: var(--input-focus-colour);
+    box-shadow: none;
+    outline: none;
+
+    & + .editor-info-block {
+      border-color: var(--input-focus-colour);
+    }
+  }
+
+  &::placeholder {
+    color: inherit;
+    opacity: 0.5;
+  }
+}
+
+input.search-input {
+  width: 100%;
+}
+
+select.form-control {
+  height: 2.6em;
+}
+
+.control-order-by {
+  display: flex;
+  align-items: center;
+  margin: 0;
+
+  & label {
+    white-space: nowrap;
+    margin-bottom: 0;
+    font-weight: normal;
+    font-size: inherit;
+  }
+
+  & select {
+    font-weight: bold;
+    border: none;
+  }
+}
+
+.control-large input {
+  font-size: 1.2em;
+  height: auto;
+  padding: 0.5em 1.1em;
+  border-radius: var(--border-radius);
+}
+
+textarea.form-control {
+  font-size: 0.8em;
+  padding: 0.6em 1.32em;
+}
+
+.editor .editor-info-block {
+  border-width: 2px;
+  border-color: var(--border-colour);
+  transition: border-color ease-in-out .15s;
+}
+
+.input-group {
+  display: flex;
+
+  & .input-group-addon,
+  & .input-group-btn {
+    width: auto;
+  }
+}
+
+@define-mixin checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4em;
+  height: 1.4em;
+  border: solid 1px var(--body-colour);
+  color: #fff;
+  margin-right: 0.6em;
+  @mixin icon;
+  font-size: 0.8em;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+@define-mixin checked $col: var(--blue) {
+  background-color: $col;
+  border-color: $col;
+  content: '\e901';
+}
+
+@define-mixin selected $col: var(--blue) {
+  background-color: $col;
+  border-color: $col;
+}
+
+label.checkbox {
+  overflow: hidden;
+
+  & span {
+    display: flex;
+    align-items: center;
+
+    &::before {
+      content: '';
+      @mixin checkbox;
+    }
+  }
+
+  & input[type=checkbox] {
+    position: absolute;
+    left: -100vw;
+
+    &:checked + span {
+      &::before {
+        @mixin checked;
+      }
+    }
+  }
+}

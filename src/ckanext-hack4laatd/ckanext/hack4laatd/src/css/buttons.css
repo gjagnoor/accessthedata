@@ -1,0 +1,627 @@
+@define-mixin btn-colour $bg, $col: #fff, $bor: $bg {
+  background-color: $bg;
+  color: $col;
+  border-color: $bor;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    background-color: color($bg shade(25%));
+    color: $col;
+    border-color: color($bor shade(25%));
+  }
+
+  &:visited {
+    color: $col;
+  }
+}
+
+.btn {
+  background-image: none;
+  text-shadow: none;
+  box-shadow: none;
+  @mixin btn-colour var(--body-colour), #fff, var(--body-colour);
+  font-size: 1em;
+  padding: 0.5em 1.1em;
+  border-radius: var(--border-radius);
+  transition: all 0.5s;
+}
+
+.btn-sm,
+.btn-group-sm > .btn {
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+.btn-xs,
+.btn-group-xs > .btn {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+.btn-primary {
+  @mixin btn-colour var(--primary-colour);
+}
+.btn-success {
+  @mixin btn-colour var(--success-colour);
+}
+.btn-info {
+  @mixin btn-colour var(--info-colour);
+}
+.btn-warning {
+  @mixin btn-colour var(--warning-colour), var(--body-colour);
+}
+.btn-danger {
+  @mixin btn-colour var(--danger-colour);
+}
+.btn-inverse {
+  @mixin btn-colour #fff, var(--primary-colour), #fff;
+}
+
+.btn-group.open .btn-primary.dropdown-toggle {
+  background-color: color(var(--primary-colour) shade(10%));
+}
+
+.explore-link {
+  color: var(--heading-link-colour);
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.2;
+
+  &::after {
+    @mixin icon;
+    @mixin icon-arrow-right;
+    color: var(--link-colour);
+    margin-left: 0.1em;
+  }
+
+  &:hover {
+    text-decoration: none;
+    color: var(--heading-link-colour);
+
+    &::after {
+      box-shadow: 0 0.1em 0 var(--link-colour);
+    }
+  }
+}
+
+
+@define-mixin btn-box-col $col: var(--blue), $btnTxtCol: #fff, $bgCol:color($col a(20%)) {
+  background-color: $bgCol;
+
+  & .icon {
+    color: $col;
+  }
+
+  & svg {
+    fill: $col;
+    transition: fill .5s;
+  }
+
+  & a:hover,
+  & a:focus,
+  & a:active {
+    & svg {
+      fill: color($col shade(25%));
+    }
+  }
+
+  & .btn {
+    @mixin btn-colour $col, $btnTxtCol;
+  }
+
+  &.full-link {
+
+    & a {
+      transition: background-color .2s;
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: $col;
+        color: $btnTxtCol;
+
+        & .icon {
+          color: $btnTxtCol;
+        }
+
+        & svg {
+          fill: $btnTxtCol;
+        }
+
+        & .btn {
+          &:hover,
+          &:focus,
+          &:active {
+            background-color: color($col a(0%));
+            border-color: color($col a(0%));
+          }
+        }
+      }
+    }
+  }
+}
+
+@define-mixin btn-box {
+  border-radius: var(--border-radius);
+  padding: var(--spacer-25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  @media (--medium-up) {
+    font-size: 0.85em;
+  }
+
+  & .icon {
+    font-size: 3em;
+    margin-bottom: 0.2em;
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+
+    & svg {
+      max-height: 100%;
+    }
+  }
+
+  & ul {
+    padding: 0;
+    margin: 0;
+
+    & li {
+      display: block;
+    }
+  }
+
+  & p {
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-bottom: 0.5em;
+  }
+
+  & .btn {
+    margin-top: auto;
+    width: 100%;
+  }
+
+  &.full-link {
+    padding: 0;
+
+    & a {
+      padding: var(--spacer-25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 100%;
+      height: 100%;
+      text-decoration: none;
+    }
+  }
+}
+
+.button-box,
+.context-info {
+  @mixin btn-box;
+  @mixin btn-box-col;
+}
+
+.button-boxes {
+  grid-column-gap: var(--spacer-25);
+
+  @media (--medium-up) {
+    display: grid;
+  }
+
+  & > * {
+    @mixin btn-box;
+    @mixin btn-box-col;
+    margin-top: var(--spacer-25);
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.remove-filter {
+  position: relative;
+  text-decoration: none;
+
+  & i {
+    font-size: 14px;
+    background-color: var(--grey);
+    color: #fff;
+    border: solid 3px #fff;
+    border-radius: 50%;
+    padding: 0.5em;
+    position: absolute;
+    top: -0.8em;
+    right: -0.8em;
+  }
+}
+
+.featured-filters {
+  margin: 2rem 0;
+  padding: 0;
+
+  & .filter-description {
+    display: none;
+
+    &:not(:empty) {
+      background-color: color(var(--grey) tint(80%));
+      border-radius: var(--border-radius);
+      padding: var(--spacer-15);
+      font-size: 16px;
+    }
+  }
+
+  & li {
+    display: flex;
+    margin-bottom: var(--spacer-25);
+
+    &.active {
+      & a {
+        background-color: var(--grey);
+
+        &:first-child {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+
+        &:last-child {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+      }
+
+      & .remove-filter {
+        display: block;
+      }
+
+      &.education a {
+        background-color: var(--grey);
+      }
+      &.environment a {
+        background-color: var(--grey);
+      }
+      &.housing a {
+        background-color: var(--grey);
+      }
+      &.immigration a {
+        background-color: var(--grey);
+      }
+      &.transportation a {
+        background-color: var(--grey);
+      }
+      &.well-being a {
+        background-color: var(--grey);
+      }
+    }
+  }
+
+  & a {
+    background-color: color(var(--grey) tint(50%));
+    color: #fff;
+    font-size: 16px;
+    padding: 0.75em 1em;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+
+    &:first-child {
+      flex-grow: 1;
+    }
+
+    &.remove-filter {
+      display: none;
+      flex-grow: 0;
+    }
+  }
+
+  & .filter-icon {
+    display: none;
+  }
+
+  & .filter-label {
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+
+  @supports (display: grid) {
+    @media (--small-up) {
+
+      & li {
+        display: grid;
+        grid-template-columns: auto;
+        grid-row-gap: var(--spacer-15);
+
+        &.active {
+          grid-template-columns: auto 2em;
+
+          & .filter-description {
+            display: block;
+            order: 3;
+            grid-column-start: 1;
+            grid-column-end: 3;
+          }
+        }
+      }
+
+      & a {
+        display: flex;
+        width: 100%;
+        align-items: center;
+      }
+
+      & .filter-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1em;
+
+        & svg {
+          fill: #fff;
+          width: 32px;
+          height: 32px;
+        }
+      }
+    }
+
+    @media (--medium-up) {
+      display: grid;
+      grid-column-gap: var(--spacer-25);
+      grid-row-gap: var(--spacer-25);
+      grid-template-columns: 1fr 1fr 1fr;
+      position: relative;
+
+      & a {
+        background-color: transparent;
+        flex-direction: column;
+        padding: 0;
+
+        &.remove-filter {
+          position: absolute;
+        }
+      }
+
+      & li {
+        grid-row-gap: 0;
+        position: relative;
+        margin: 0;
+
+        &.filter-description {
+          display: block;
+          grid-column-start: 1;
+          grid-column-end: 4;
+        }
+
+        &.active {
+          grid-template-columns: 1fr;
+
+          & .filter-icon {
+            background-color: var(--grey);
+          }
+
+          & .filter-description {
+            display: none;
+          }
+
+          & a {
+            background-color: transparent;
+          }
+
+          &.education a,
+          &.environment a,
+          &.housing a,
+          &.immigration a,
+          &.transportation a,
+          &.well-being a {
+            background-color: transparent;
+          }
+
+          &.education a .filter-icon {
+            background-color: var(--grey);
+          }
+          &.environment a .filter-icon {
+            background-color: var(--grey);
+          }
+          &.housing a .filter-icon {
+            background-color: var(--grey);
+          }
+          &.immigration a .filter-icon {
+            background-color: var(--grey);
+          }
+          &.transportation a .filter-icon {
+            background-color: var(--grey);
+          }
+          &.well-being a .filter-icon {
+            background-color: var(--grey);
+          }
+        }
+      }
+
+      & .filter-icon {
+        background-color: color(var(--grey) tint(50%));
+        border-radius: var(--border-radius);
+        margin: 0;
+        width: 100%;
+
+        &:before {
+          content:'';
+          padding-top: 100%;
+        }
+
+        & svg {
+          margin: 15%;
+          width: 70%;
+          height: 70%;
+        }
+      }
+
+      & .filter-label {
+        color: var(--grey);
+        padding-top: 0.5em;
+      }
+
+    }
+
+    @media (--large-up) {
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+      & a {
+        flex-direction: column;
+
+        &.filter {
+          &:hover {
+            & .filter-label {
+              display: block;
+            }
+          }
+        }
+
+        &.remove-filter {
+          & i {
+            font-size: 12px;
+          }
+        }
+      }
+
+      & .filter-label {
+        font-size: 13px;
+      }
+
+      & li {
+
+        &.filter-description {
+          grid-column-end: 7;
+        }
+      }
+    }
+
+  }
+}
+
+.pill {
+  background-color: var(--grey);
+  border-radius: var(--border-radius);
+  padding: 0.75em 1em;
+  display: inline-flex;
+  margin: 0 1em 1em 0;
+
+  & .remove-filter  {
+    width: 0.5em;
+
+    & i {
+      top: -1.9em;
+      right: -1.9em;
+
+      @media (--large-up) {
+        top: -2em;
+        right: -2em;
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.tag-list {
+  padding: 0;
+
+  & li {
+      &.education a {
+        background-color: var(--grey);
+      }
+      &.environment a {
+        background-color: var(--grey);
+      }
+      &.housing a {
+        background-color: var(--grey);
+      }
+      &.immigration a {
+        background-color: var(--grey);
+      }
+      &.transportation a {
+        background-color: var(--grey);
+      }
+      &.well-being a {
+        background-color: var(--grey);
+      }
+  }
+}
+
+.tag,
+a.tag {
+  margin-bottom: 0.75em;
+  color: #fff;
+  background-color: var(--grey);
+  padding: 0.4em 1em;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 14px;
+
+  &:hover {
+    background-color: var(--blue);
+    border: none;
+    box-shadow: none;
+  }
+
+  &:visited {
+    color: #fff;
+  }
+}
+
+.to-top {
+  position: fixed;
+  top: 50vh;
+  right: -12vw;
+  width: 2.2rem;
+  height: 2.2rem;
+  margin-top: -1.1rem;
+  background-color: var(--blue);
+  color: var(--body-bg);
+  transition: all 0.5s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: solid 0.2rem var(--body-bg);
+  box-sizing: content-box;
+  z-index: 1;
+
+  &.active,
+  &:focus {
+    right: 1vw;
+  }
+
+  & i {
+    font-size: 0.9rem;
+  }
+
+  & .text {
+    font-size: 0.4rem;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  &:hover {
+    text-decoration: none;
+    background-color: color(var(--blue) shade(25%));
+    color: var(--body-bg);
+  }
+
+  &:focus {
+    outline: none;
+    text-decoration: none;
+    border-color: color(var(--blue) shade(25%));
+    color: var(--body-bg);
+  }
+
+  &:visited {
+    color: var(--body-bg);
+  }
+}
