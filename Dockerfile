@@ -39,14 +39,15 @@ RUN echo 'Installing extensions' && \
     pip install -e git+https://github.com/okfn/ckanext-contact.git@lacounts-0.1#egg=ckanext-contact
 
 
-COPY . /srv/app/src/ckanext-hack4laatd
+COPY ./src/ckanext-hack4laatd/ /srv/app/src_extensions/ckanext-hack4laatd
 
 RUN apk add bind-tools
 RUN dig pypi.org
 
 # Install project extension
-RUN pip install -e /srv/app/src/ckanext-hack4laatd && \
-    pip install -r /srv/app/src/ckanext-lacounts/requirements.txt && \
+RUN pip install -e /srv/app/src_extensions/ckanext-hack4laatd && \
+    pip install -r /srv/app/src_extensions/ckanext-hack4laatd/requirements.txt && \
+    python3 -m pip install -U textblob && \
     python3 -m textblob.download_corpora && \
     cp -r /root/nltk_data $APP_DIR
 
