@@ -10,11 +10,12 @@ RUN echo $TZ > /etc/timezone
 # Install any extensions needed by your CKAN instance
 # (Make sure to add the plugins to CKAN__PLUGINS in the .env file)
 # For instance:
-# RUN pip install -e git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pages && \
-#    pip install -e git+https://github.com/ckan/ckanext-dcat.git@v0.0.6#egg=ckanext-dcat && \
-#    pip install -r https://raw.githubusercontent.com/ckan/ckanext-dcat/v0.0.6/requirements.txt
+RUN echo "installing plugins" && \
 
-# Clone the extension(s) your are writing for your own project in the `src` folder
+    # scheming
+    pip install -e git+https://github.com/ckan/ckanext-scheming.git#egg=ckanext-scheming
+    
+    # Clone the extension(s) your are writing for your own project in the `src` folder
 # to get them mounted in this image at runtime
 COPY . /srv/app/src/ckanext-hack4laatd
 
