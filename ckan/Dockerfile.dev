@@ -15,7 +15,13 @@ RUN echo "installing plugins" && \
     pip install -e git+https://github.com/ckan/ckanext-scheming.git#egg=ckanext-scheming && \
     # harvest
    pip install -e git+https://github.com/ckan/ckanext-harvest.git#egg=ckanext-harvest && \
-   pip install -r https://raw.githubusercontent.com/ckan/ckanext-harvest/master/requirements.txt
+   pip install -r https://raw.githubusercontent.com/ckan/ckanext-harvest/master/requirements.txt &&  \
+   #socrata harvester
+#    pip install -e git+https://github.com/opendatamonitor/socrata-harvester.git#egg=socrata-harvest && \
+#    pip install -r https://raw.githubusercontent.com/opendatamonitor/socrata-harvester/master/pip-requirements.txt
+    #dcat harvester
+    pip install -e git+https://github.com/ckan/ckanext-dcat.git#egg=ckanext-dcat && \
+    pip install -r https://raw.githubusercontent.com/ckan/ckanext-dcat/master/requirements.txt
 
     # Clone the extension(s) your are writing for your own project in the `src` folder
 # to get them mounted in this image at runtime
