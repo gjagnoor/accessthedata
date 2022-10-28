@@ -6,7 +6,7 @@ import ckan.plugins as p
 
 def hello_plugin():
     u'''A simple view function'''
-    return u'Hello World, this is served from accessthedata extension'
+    return u'Hellooooo World, this is served from accessthedata extension'
 
 
 class Hack4LaatdPlugin(plugins.SingletonPlugin):
