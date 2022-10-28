@@ -21,7 +21,10 @@ RUN echo "installing plugins" && \
 #    pip install -r https://raw.githubusercontent.com/opendatamonitor/socrata-harvester/master/pip-requirements.txt
     #dcat harvester
     pip install -e git+https://github.com/ckan/ckanext-dcat.git#egg=ckanext-dcat && \
-    pip install -r https://raw.githubusercontent.com/ckan/ckanext-dcat/master/requirements.txt
+    pip install -r https://raw.githubusercontent.com/ckan/ckanext-dcat/master/requirements.txt && \
+    #googleanalytics
+    pip install -e  git+https://github.com/ckan/ckanext-googleanalytics.git#egg=ckanext-googleanalytics && \
+    pip install -r https://raw.githubusercontent.com/ckan/ckanext-googleanalytics/master/requirements.txt
 
     # Clone the extension(s) your are writing for your own project in the `src` folder
 # to get them mounted in this image at runtime
