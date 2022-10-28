@@ -27,7 +27,11 @@ RUN echo "installing plugins" && \
     pip install -r https://raw.githubusercontent.com/ckan/ckanext-googleanalytics/master/requirements.txt && \
     # pip install -e git+https://github.com/ckan/ckanext-disqus.git#egg=disqus
     # hierarchy
-    pip install -e git+https://github.com/davidread/ckanext-hierarchy.git#egg=ckanext-hierarchy
+    pip install -e git+https://github.com/davidread/ckanext-hierarchy.git#egg=ckanext-hierarchy && \
+    # showcase
+    pip install -e git+https://github.com/ckan/ckanext-showcase.git#egg=ckanext-showcase && \
+    pip install -r https://raw.githubusercontent.com/ckan/ckanext-showcase/master/requirements.txt
+    # geoview
 
     # Clone the extension(s) your are writing for your own project in the `src` folder
 # to get them mounted in this image at runtime
