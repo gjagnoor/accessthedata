@@ -36,7 +36,9 @@ RUN echo "installing plugins" && \
     pip install -r https://raw.githubusercontent.com/ckan/ckanext-geoview/master/dev-requirements.txt && \
     #pdfview
     pip install -e git+https://github.com/ckan/ckanext-pdfview.git#egg=ckanext-pdfview && \
-    pip install -r https://raw.githubusercontent.com/ckan/ckanext-pdfview/master/dev-requirements.txt
+    pip install -r https://raw.githubusercontent.com/ckan/ckanext-pdfview/master/dev-requirements.txt && \
+    # contact
+    pip install -e git+https://github.com/NaturalHistoryMuseum/ckanext-contact.git#egg=ckanext-contact
 
 
     # Clone the extension(s) your are writing for your own project in the `src` folder
