@@ -30,8 +30,12 @@ RUN echo "installing plugins" && \
     pip install -e git+https://github.com/davidread/ckanext-hierarchy.git#egg=ckanext-hierarchy && \
     # showcase
     pip install -e git+https://github.com/ckan/ckanext-showcase.git#egg=ckanext-showcase && \
-    pip install -r https://raw.githubusercontent.com/ckan/ckanext-showcase/master/requirements.txt
+    pip install -r https://raw.githubusercontent.com/ckan/ckanext-showcase/master/requirements.txt && \
     # geoview
+    #pdfview
+    pip install -e git+https://github.com/ckan/ckanext-pdfview.git#egg=ckanext-pdfview && \
+    pip install -r https://raw.githubusercontent.com/ckan/ckanext-pdfview/master/dev-requirements.txt
+
 
     # Clone the extension(s) your are writing for your own project in the `src` folder
 # to get them mounted in this image at runtime
