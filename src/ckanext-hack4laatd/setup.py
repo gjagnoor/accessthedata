@@ -85,6 +85,11 @@ setup(
     entry_points='''
         [ckan.plugins]
         hack4laatd=ckanext.hack4laatd.plugin:Hack4LaatdPlugin
+        hack4laatd_ckan_harvester=ckanext.hack4laatd.harvest.harvesters.ckan:Hack4LaatdCKANHarvester
+        hack4laatd_esrigeoportal_harvester=ckanext.hack4laatd.harvest.harvesters.esri:Hack4LaatdESRIGeoportalHarvester
+
+        [ckan.rdf.profiles]
+        hack4laatd_esri_geoportal_profile=ckanext.hack4laatd.harvest.harvesters.esri:Hack4LaatdsESRIGeoportalProfile
 
         [babel.extractors]
         ckan = ckan.lib.extract:extract_ckan
