@@ -32,6 +32,8 @@ RUN echo "installing plugins" && \
     pip install -e git+https://github.com/ckan/ckanext-showcase.git#egg=ckanext-showcase && \
     pip install -r https://raw.githubusercontent.com/ckan/ckanext-showcase/master/requirements.txt && \
     # geoview
+    pip install git+https://github.com/ckan/ckanext-geoview.git#egg=ckanext-geoview && \
+    pip install -r https://raw.githubusercontent.com/ckan/ckanext-geoview/master/dev-requirements.txt && \
     #pdfview
     pip install -e git+https://github.com/ckan/ckanext-pdfview.git#egg=ckanext-pdfview && \
     pip install -r https://raw.githubusercontent.com/ckan/ckanext-pdfview/master/dev-requirements.txt
