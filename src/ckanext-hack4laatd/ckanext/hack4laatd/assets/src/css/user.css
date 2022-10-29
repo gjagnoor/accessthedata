@@ -1,0 +1,121 @@
+/* front end */
+/* admin actions */
+.admin-page-actions {
+  position: fixed;
+  z-index: 99999;
+  top: 16px;
+  left: 16px;
+
+  & .btn {
+    @mixin btn-colour #2980b9;
+    opacity: 0.9;
+    border: none;
+    margin-bottom: var(--spacer-15);
+  }
+
+  & > .btn,
+  & .dropdown > .btn {
+    width: 48px;
+    height: 48px;
+    overflow: hidden;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+
+    & i {
+      transition-property: all;
+      transition-duration: .1s;
+      transition-timing-function: ease-in;
+
+      &::before {
+        width: 48px;
+      }
+    }
+
+    &:hover {
+      & i {
+        font-size: 1.1em;
+      }
+      & .fa-wrench {
+        font-size: inherit;
+        &::before {
+          transform: rotate(15deg);
+        }
+      }
+    }
+  }
+
+  & .dropdown {
+    &::after {
+      display: none;
+    }
+  }
+
+  & .dropdown-menu {
+    box-shadow: none;
+    background-color: transparent;
+    margin-top: var(--spacer-15);
+
+    & .btn {
+      & i {
+        display: none;
+      }
+    }
+  }
+}
+@media (--small-only) {
+  .admin-page-actions,
+  .ct-widget.ct-ignition {
+    left: -6px;
+  }
+}
+
+.topic.details .admin-page-actions,
+.search .admin-page-actions,
+.publishers-index .admin-page-actions,
+.topics-index .admin-page-actions,
+.getinvolved .admin-page-actions {
+  top: 75px;
+}
+
+
+/* back-end */
+.user,
+.admin {
+  & [role=main] {
+    font-size: var(--font-size-medium);
+    padding-top: var(--spacer-15);
+  }
+
+  & .toolbar {
+    display: none;
+  }
+
+  & .page-header {
+    & .content_action {
+      display: none;
+    }
+  }
+
+  & section.community {
+    display: none;
+  }
+
+  & h1 {
+    border: none;
+    font-size: 1.8rem;
+  }
+}
+
+.page-header {
+  & .nav-tabs a:hover {
+    background-color: var(--blue);
+  }
+}
+
+.user {
+  & .secondary .image {
+    display: none;
+  }
+}

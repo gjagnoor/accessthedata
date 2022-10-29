@@ -1,0 +1,89 @@
+@define-mixin icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@define-mixin icon-search {
+  content: "\f002";
+}
+
+@define-mixin icon-close {
+  content: "\f00d";
+}
+
+@define-mixin icon-arrow-right {
+  content: "\e900";
+}
+
+@define-mixin icon-checkmark {
+  content: "\e901";
+}
+
+@define-mixin icon-cheveron-left {
+  content: "\e902";
+}
+
+@define-mixin icon-cheveron-right {
+  content: "\e903";
+}
+
+@define-mixin icon-github {
+  content: "\f113";
+}
+
+@define-mixin icon-mail {
+  content: "\f003";
+}
+
+@define-mixin icon-twitter {
+  content: "\e999";
+}
+
+@define-mixin icon-bulb {
+  content: "\f0eb";
+}
+
+@define-mixin icon-heart {
+  content: "\e908";
+}
+
+@define-mixin icon-plus {
+  content: "\f0fe";
+}
+
+@define-mixin icon-fire {
+  content: "\e904";
+}
+
+.fa {
+  display: inline-flex;
+}
+
+.fa-times:before,
+.fa-github-alt,
+.fa-envelope-o,
+.fa-lightbulb-o,
+.fa-search,
+.fa-plus-square,
+.icon-twitter,
+.icon-trending {
+  @mixin icon;
+}
+
+.icon-twitter::before {
+  @mixin icon-twitter;
+}
+
+.icon-trending::before {
+  @mixin icon-fire;
+}

@@ -1,0 +1,46 @@
+{
+  "scheming_presets_version": 1,
+  "about": "Presets for the Lacounts project",
+  "about_url": "",
+  "presets": [
+    {
+      "preset_name": "related_datasets",
+      "values": {
+        "validators": "ignore_missing",
+        "form_snippet": "related_datasets.html",
+        "display_snippet": null
+      }
+    },
+    {
+      "preset_name": "featured_stories",
+      "values": {
+        "validators": "ignore_missing",
+        "form_snippet": "featured_stories.html",
+        "display_snippet": null
+      }
+    },
+    {
+      "preset_name": "featured_datasets",
+      "values": {
+        "validators": "ignore_missing",
+        "form_snippet": "featured_datasets.html",
+        "display_snippet": null
+      }
+    },
+    {
+      "preset_name": "groups_override",
+      "values": {
+        "validators": "convert_groups_override ignore_missing",
+        "form_snippet": "groups_override.html",
+        "display_snippet": null
+      }
+    },
+    {
+      "preset_name": "group_or_org_slug",
+      "values": {
+        "validators": "not_empty unicode name_validator group_name_validator",
+        "form_snippet": "slug.html"
+      }
+    }
+  ]
+}
