@@ -1,10 +1,7 @@
 {% extends "page.html" %} {% import 'macros/editable.html' as editable with
 context %} {% block subtitle %}{{ _('About') }}{% endblock %} {% block
 breadcrumb_content %}
-<li class="active">
-  {% link_for _('About'),
-  controller='ckanext.hack4laatd.controller:StaticController', action='about' %}
-</li>
+<li class="active"></li>
 {% endblock %} {% block primary_content %}
 <h1>About</h1>
 <h2 id="about-who">Who: a team of changemakers</h2>
