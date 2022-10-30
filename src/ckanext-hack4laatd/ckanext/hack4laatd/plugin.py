@@ -8,6 +8,8 @@ from ckanext.hack4laatd import helpers, validators, jobs
 from ckanext.hack4laatd.logic import actions, auth
 from flask import Blueprint
 
+def redirect_url(url):
+    return toolkit.redirect_to(url)
 
 def hello_plugin():
     u'''A simple view function'''
@@ -15,7 +17,7 @@ def hello_plugin():
 
 #actions
 def home():
-    return toolkit.render('home/index.html')
+    return toolkit.render('home/index.html') or redirect_url('/dataset')
 
 def faqs():
     return toolkit.render('static/faqs.html')
@@ -129,7 +131,7 @@ class Hack4LaatdPlugin(plugins.SingletonPlugin, DefaultTranslation):
             ('/terms', 'termsofservice', termsofservice),
             ('/faqs', 'faqs', faqs),
             ('/aboutus', 'aboutus', aboutus),
-            ('/resources', 'resources', resources)
+            ('/resources', 'resources', resources),
         ]
         for rule in rules:
             blueprint.add_url_rule(*rule)

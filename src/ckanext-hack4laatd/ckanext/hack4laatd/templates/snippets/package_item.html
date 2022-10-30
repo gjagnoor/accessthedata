@@ -1,0 +1,66 @@
+{% ckan_extends %}
+
+{% block heading %}
+  {{ super() }}
+
+  {% block organization %}
+    {% if package.organization %}
+      <a href="" class="publisher">
+        {{ h.get_organization_display_title(package.organization) }}
+      </a>
+    {% endif %}
+  {% endblock %}
+{% endblock %}
+
+{% block heading_meta %}
+  {% if package.get('state', '').startswith('draft') %}
+    <span class="label label-info">{{ _('Draft') }}</span>
+  {% elif package.get('state', '').startswith('deleted') %}
+    <span class="label label-danger">{{ _('Deleted') }}</span>
+  {% endif %}
+  {{ h.popular('recent views', package.tracking_summary.recent, min=h.get_minimum_views_for_trending()) if package.tracking_summary }}
+{% endblock %}
+
+{% block notes %}
+  <div class="dataset-notes">
+  {% if package.type == 'showcase' and package.image_display_url %}
+    <a class="image" href="">
+      <img src="" alt="">
+    </a>
+  {% endif %}
+  <div>
+    {{ super() }}
+
+    {% if package.groups %}
+      <ul class="dataset-resources list-unstyled">
+        {% for grp in package.groups %}
+          <li><a class="label label-default" href="">{{ h.truncate(grp.display_name, 22) }}</a></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if package.type == 'showcase' %}
+      <ul class="dataset-resources list-unstyled">
+        <li>
+          <span href="" class="label label-default label-format">{{ package.story_type or 'Data stories' }}</span>
+        </li>
+      </ul>
+    {% elif package.resources and not hide_resources %}
+      {% block resources_outer %}
+        <ul class="dataset-resources list-unstyled">
+          {% block resources_inner %}
+            {% for resource in h.dict_list_reduce(package.resources, 'format') %}
+            <li>
+              <span class="label label-default label-format">{{ resource }}</span>
+            </li>
+            {% endfor %}
+          {% endblock %}
+        </ul>
+      {% endblock %}
+    {% endif %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block resources %}
+{% endblock %}
