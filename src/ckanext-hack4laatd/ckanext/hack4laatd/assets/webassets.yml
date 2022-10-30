@@ -1,14 +1,17 @@
 hack4laatd-js:
   filter: rjsmin
-  output: ckanext-hack4laatd/%(version)s-hack4laatd.js
+  output: ckanext-hack4laatd/extension.js
   contents:
     - js/hack4laatd.js
+    - theme.js
+    - editable.js
   extra:
     preload:
       - base/main
 
 hack4laatd-css:
   filter: cssrewrite
-  output: ckanext-hack4laatd/%(version)s-hack4laatd.css
+  output: ckanext-hack4laatd/extension.css
   contents:
     - css/hack4laatd.css
+    - theme.css

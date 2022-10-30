@@ -52,9 +52,7 @@ class Hack4LaatdPlugin(plugins.SingletonPlugin, DefaultTranslation):
     def update_config(self, config_):
         toolkit.add_template_directory(config_, 'templates')
         toolkit.add_public_directory(config_, 'public')
-        toolkit.add_resource('fanstatic',
-            'hack4laatd')
-        toolkit.add_resource('assets', 'hack4laatd_assets')
+        toolkit.add_resource('assets', 'hack4laatd')
     
     def update_config_schema(self, schema):
         schema.update({
