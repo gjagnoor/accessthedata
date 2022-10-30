@@ -1,11 +1,7 @@
 {% extends "page.html" %} {% import 'macros/editable.html' as editable with
 context %} {% block subtitle %}{{ _('Privacy Policy') }}{% endblock %} {% block
 breadcrumb_content %}
-<li class="active">
-  {% link_for _('Privacy Policy'),
-  controller='ckanext.hack4laatd.controller:StaticController',
-  action='privacypolicy' %}
-</li>
+<li class="active"></li>
 {% endblock %} {% block primary_content %} {% call
 editable.region('privacy-policy') %}
 <h1>Privacy Policy</h1>
