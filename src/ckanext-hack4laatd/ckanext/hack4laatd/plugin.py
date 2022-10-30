@@ -126,7 +126,7 @@ class Hack4LaatdPlugin(plugins.SingletonPlugin, DefaultTranslation):
             ('/privacy', 'privacy', privacypolicy),
             ('/terms', 'termsofservice', termsofservice),
             ('/faqs', 'faqs', faqs),
-            ('/about', 'aboutus', aboutus),
+            ('/aboutus', 'aboutus', aboutus),
             ('/resources', 'resources', resources)
         ]
         for rule in rules:
