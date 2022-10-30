@@ -1,0 +1,84 @@
+{
+  "scheming_version": 1,
+  "group_type": "topic",
+  "about": "CKAN groups schema customized for the LA Counts project",
+  "about_url": "http://github.com/okfn/ckanext-hack4laatd",
+  "fields": [
+    {
+      "field_name": "name",
+      "form_placeholder": "eg. my-topic",
+      "label": "URL",
+      "preset": "group_or_org_slug"
+    },
+    {
+      "field_name": "title",
+      "form_placeholder": "eg. A descriptive title",
+      "label": "Title",
+      "preset": "title",
+      "required": true
+    },
+    {
+      "field_name": "description",
+      "form_placeholder": "eg. Some useful notes about the topic",
+      "form_snippet": "markdown.html",
+      "label": "Description"
+    },
+    {
+      "field_name": "harvest_terms",
+      "form_placeholder": "eg. nature\npollution\nco2",
+      "form_snippet": "textarea_json.html",
+      "label": "Harvest terms",
+      "help_text": "Each term should be placed on a new line. Terms are case-insensitive. Plurals are automatically added.",
+      "validators": "convert_to_list",
+      "output_validators": "convert_from_list"
+    },
+    {
+      "field_name": "working_group_url",
+      "label": "Working group URL",
+      "form_placeholder": "e.g. http://example.com/wg",
+      "display_snippet": "url.html",
+      "help_text": "This link will be used for the \"Join group\" button"
+    },
+    {
+      "field_name": "working_group_description",
+      "label": "Working group Description",
+      "form_snippet": "markdown.html",
+      "help_text": "A short description for the Working Group, shown on the Topic page and on the Get Involved page."
+    },
+
+    {
+      "field_name": "featured_stories",
+      "preset": "featured_stories",
+      "label": "Featured stories",
+      "help_text": "Links to featured stories. It supports multiple selections"
+    },
+    {
+      "field_name": "featured_datasets",
+      "preset": "featured_datasets",
+      "label": "Featured datasets",
+      "help_text": "Links to featured datasets. It supports multiple selections"
+    },
+    {
+      "field_name": "featured",
+      "help_text": "Featured topics are shown on the home page",
+      "label": "Featured topic",
+      "preset": "select",
+      "required": true,
+      "choices": [
+        {
+          "label": "No",
+          "value": "no"
+        },
+        {
+          "label": "Yes",
+          "value": "yes"
+        }
+      ]
+    },
+    {
+      "field_name": "image",
+      "form_snippet": "organization_image.html",
+      "label": "Image"
+    }
+  ]
+}
