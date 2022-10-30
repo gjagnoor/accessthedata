@@ -20,4 +20,5 @@ class="home"{% endblock %} {% block content %} {% block header %} {% include
     {% endcall %} {% snippet 'home/snippets/search.html' %}
   </div>
 </section>
-{% endblock %}
+{% block footer %} {% include "custom_footer.html" %} {% endblock %} {% endblock
+%}
