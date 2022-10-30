@@ -123,7 +123,6 @@ class Hack4LaatdPlugin(plugins.SingletonPlugin, DefaultTranslation):
         blueprint.template_folder = 'templates'
         # Add plugin url rules to Blueprint object
         rules = [
-            ('/', 'home', home),
             ('/hello_plugin', 'hello_plugin', hello_plugin),
             ('/privacy', 'privacy', privacypolicy),
             ('/terms', 'termsofservice', termsofservice),

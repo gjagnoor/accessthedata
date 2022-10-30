@@ -1,17 +1,32 @@
-{% set placeholder_value = [_('Search for topics like ‘environment’'), _('Search for topics like ‘housing’'), _('Search for topics like ‘immigration’'), _('Find data on ‘school districts’'), _('Find data on ‘food consumption’'), _('Find stories on ‘parking tickets’'), _('Find stories on ‘equity’')] | random  %}
-{% set placeholder = placeholder_value %}
+{% set placeholder_value = [_('Search for topics like ‘environment’'), _('Search
+for topics like ‘housing’'), _('Search for topics like ‘immigration’'), _('Find
+data on ‘school districts’'), _('Find data on ‘food consumption’'), _('Find
+stories on ‘parking tickets’'), _('Find stories on ‘equity’')] | random %} {%
+set placeholder = placeholder_value %}
 
-
-<form class="module-content search-form" method="get" action="{% url_for 'dataset' %}">
+<form class="module-content search-form" method="get" action="">
   <div>
-    {% if g.search_facets.get('type_label') %}
-      {% set counts = h.get_homepage_counts() %}
-      Search <a href="{{ h.url_for('dataset_search', type_label='Story') }}">{{ counts['stories'] }} stories</a> and <a href="{{ h.url_for('dataset_search', type_label='Data') }}">{{ counts['datasets'] }} datasets</a> from <a href="{{ h.url_for('publisher_index') }}">{{counts['publishers'] }} publishers</a>:
-    {% endif %}
+    {% if g.search_facets.get('type_label') %} {% set counts =
+    h.get_homepage_counts() %} Search
+    <a href="{{ 'hello' }}">{{ counts['stories'] }} stories</a>
+    and
+    <a href="{{ 'hello' }}">{{ counts['datasets'] }} datasets</a>
+    from
+    <a href="{{ 'hello' }}">{{counts['publishers'] }} publishers</a>: {% endif
+    %}
   </div>
 
   <div class="search-input form-group search-giant">
-    <input aria-label="{% block header_site_search_label %}{{ _('Search datasets') }}{% endblock %}" id="field-main-search" type="text" class="form-control" name="q" value="" autocomplete="off" placeholder="{% block search_placeholder %}{{ placeholder }}{% endblock %}" />
+    <input
+      aria-label="{% block header_site_search_label %}{{ _('Search datasets') }}{% endblock %}"
+      id="field-main-search"
+      type="text"
+      class="form-control"
+      name="q"
+      value=""
+      autocomplete="off"
+      placeholder="{% block search_placeholder %}{{ placeholder }}{% endblock %}"
+    />
     <button type="submit">
       <i class="fa fa-search"></i>
       <span class="sr-only">{{ _('Search') }}</span>
