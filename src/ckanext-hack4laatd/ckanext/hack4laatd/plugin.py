@@ -50,7 +50,7 @@ class Hack4LaatdPlugin(plugins.SingletonPlugin, DefaultTranslation):
         toolkit.add_public_directory(config_, 'public')
         toolkit.add_resource('fanstatic',
             'hack4laatd')
-        toolkit.add_resource('assets', 'hack4laatd_theme')
+        toolkit.add_resource('assets', 'hack4laatd_assets')
     
     def update_config_schema(self, schema):
         schema.update({
