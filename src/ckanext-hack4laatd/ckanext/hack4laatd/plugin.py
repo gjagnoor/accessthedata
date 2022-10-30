@@ -15,19 +15,19 @@ def hello_plugin():
     return u'Hello World, this is served from accessthedata extension'
 
 #actions
-def faqs(self):
+def faqs():
     return toolkit.render('static/faqs.html')
 
-def aboutus(self):
+def aboutus():
     return toolkit.render('static/about.html')
 
-def termsofservice(self):
+def termsofservice():
     return toolkit.render('static/termsofservice.html')
 
-def privacypolicy(self):
+def privacypolicy():
     return toolkit.render('static/privacypolicy.html')
 
-def resources(self):
+def resources():
     return toolkit.render('static/resources.html')
 
 
