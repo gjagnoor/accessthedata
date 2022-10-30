@@ -124,6 +124,7 @@ class Hack4LaatdPlugin(plugins.SingletonPlugin, DefaultTranslation):
         # Add plugin url rules to Blueprint object
         rules = [
             ('/hello_plugin', 'hello_plugin', hello_plugin),
+            ('/dataset', 'dataset', hello_plugin),
             ('/privacy', 'privacy', privacypolicy),
             ('/terms', 'termsofservice', termsofservice),
             ('/faqs', 'faqs', faqs),

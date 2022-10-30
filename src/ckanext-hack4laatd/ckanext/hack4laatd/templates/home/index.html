@@ -1,10 +1,8 @@
 {% ckan_extends %} {% set intro = g.site_intro_text %} {% import
 'macros/editable.html' as editable with context %} {% block scripts %} {% asset
 'ckanext-hack4laatd/extension.js' %} {% endblock %} {% block bodytag %}
-class="home"{% endblock %} {% block content %}
-<section class="homepage layout1">
-  <p>hello</p>
-</section>
+class="home"{% endblock %} {% block content %} {% block header %} {% include
+"custom_header.html" %} {% endblock %}
 <section class="hero">
   <div class="images">
     <img id="BannerImage" alt="" />
