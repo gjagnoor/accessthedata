@@ -6,7 +6,6 @@ from routes.mapper import SubMapper
 from ckanext.hack4laatd import helpers, validators, jobs
 from ckanext.hack4laatd import helpers, validators, jobs
 from ckanext.hack4laatd.logic import actions, auth
-import ckan.plugins as p
 from flask import Blueprint
 
 
@@ -39,7 +38,7 @@ class Hack4LaatdPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.ITranslation)
     plugins.implements(plugins.ITemplateHelpers)
-    p.implements(p.IBlueprint)
+    plugins.implements(plugins.IBlueprint)
     plugins.implements(plugins.IFacets, inherit=True)
     plugins.implements(plugins.IPackageController, inherit=True)
     plugins.implements(plugins.IGroupController, inherit=True)
