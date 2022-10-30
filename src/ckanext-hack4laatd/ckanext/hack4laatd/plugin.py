@@ -15,6 +15,9 @@ def hello_plugin():
     return u'Hello World, this is served from accessthedata extension'
 
 #actions
+def home():
+    return toolkit.render('home/index.html')
+
 def faqs():
     return toolkit.render('static/faqs.html')
 
@@ -29,6 +32,7 @@ def privacypolicy():
 
 def resources():
     return toolkit.render('static/resources.html')
+
 
 
 class Hack4LaatdPlugin(plugins.SingletonPlugin, DefaultTranslation):
@@ -122,6 +126,7 @@ class Hack4LaatdPlugin(plugins.SingletonPlugin, DefaultTranslation):
         blueprint.template_folder = 'templates'
         # Add plugin url rules to Blueprint object
         rules = [
+            ('/', 'home', home),
             ('/hello_plugin', 'hello_plugin', hello_plugin),
             ('/privacy', 'privacy', privacypolicy),
             ('/terms', 'termsofservice', termsofservice),
