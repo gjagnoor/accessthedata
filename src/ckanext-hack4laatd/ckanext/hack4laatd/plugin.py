@@ -6,16 +6,41 @@ from routes.mapper import SubMapper
 from ckanext.hack4laatd import helpers, validators, jobs
 from ckanext.hack4laatd import helpers, validators, jobs
 from ckanext.hack4laatd.logic import actions, auth
+from flask import Blueprint
+
+def redirect_url(url):
+    return toolkit.redirect_to(url)
 
 def hello_plugin():
     u'''A simple view function'''
     return u'Hello World, this is served from accessthedata extension'
 
+#actions
+def home():
+    return toolkit.render('home/index.html') or redirect_url('/dataset')
+
+def faqs():
+    return toolkit.render('static/faqs.html')
+
+def aboutus():
+    return toolkit.render('static/about.html')
+
+def termsofservice():
+    return toolkit.render('static/termsofservice.html')
+
+def privacypolicy():
+    return toolkit.render('static/privacypolicy.html')
+
+def resources():
+    return toolkit.render('static/resources.html')
+
+
+
 class Hack4LaatdPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.ITranslation)
     plugins.implements(plugins.ITemplateHelpers)
-    plugins.implements(plugins.IRoutes, inherit=True)
+    plugins.implements(plugins.IBlueprint)
     plugins.implements(plugins.IFacets, inherit=True)
     plugins.implements(plugins.IPackageController, inherit=True)
     plugins.implements(plugins.IGroupController, inherit=True)
@@ -28,9 +53,7 @@ class Hack4LaatdPlugin(plugins.SingletonPlugin, DefaultTranslation):
     def update_config(self, config_):
         toolkit.add_template_directory(config_, 'templates')
         toolkit.add_public_directory(config_, 'public')
-        toolkit.add_resource('fanstatic',
-            'hack4laatd')
-        toolkit.add_resource('assets', 'hack4laatd_theme')
+        toolkit.add_resource('assets', 'accessthedata')
     
     def update_config_schema(self, schema):
         schema.update({
@@ -88,64 +111,32 @@ class Hack4LaatdPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'format_iso_date_string': helpers.format_iso_date_string,
             'get_all_working_groups': helpers.get_all_working_groups,
         }
+
+    # IBlueprint
     
-     # IRoutes
+    def get_blueprint(self):
+        '''Return blueprints to be registered by the app.
+        This method can return either a Flask Blueprint object or
+        a list of Flask Blueprint objects.
+        '''
 
-    def before_map(self, map):
-        # These named routes are used for custom dataset forms which will use
-        # the names below based on the dataset.type ('dataset' is the default
-        # type)
-        with SubMapper(map, controller='ckanext.hack4laatd.controller:BlogController') as m: # noqa
-            m.connect('blog_search', '/blog', action='search')
-            m.connect('blog_read', '/blog/{id}', action='read')
+        # Create Blueprint for plugin
+        blueprint = Blueprint(self.name, self.__module__)
+        blueprint.template_folder = 'templates'
+        # Add plugin url rules to Blueprint object
+        rules = [
+            ('/hello_plugin', 'hello_plugin', hello_plugin),
+            ('/dataset', 'dataset', hello_plugin),
+            ('/privacy', 'privacy', privacypolicy),
+            ('/terms', 'termsofservice', termsofservice),
+            ('/faqs', 'faqs', faqs),
+            ('/aboutus', 'aboutus', aboutus),
+            ('/resources', 'resources', resources),
+        ]
+        for rule in rules:
+            blueprint.add_url_rule(*rule)
 
-        with SubMapper(map, controller='ckanext.hack4laatd.controller:StaticController') as m: # noqa
-            m.connect('privacypolicy', '/privacy', action='privacypolicy')
-            m.connect('termsofservice', '/terms', action='termsofservice')
-            m.connect('faqs', '/faqs', action='faqs')
-            m.connect('aboutus', '/about', action='aboutus')
-            m.connect('resources', '/resources', action='resources')
-
-        with SubMapper(map, controller='ckanext.hack4laatd.controller:GetInvolvedController') as m: # noqa
-            m.connect('getinvolved', '/getinvolved', action='index')
-            m.connect('getinvolved_admin', '/ckan-admin/get_involved_admin',
-                      action='manage_get_involved'),
-            m.connect('getinvolved_event_remove',
-                      '/ckan-admin/getinvolved_remove_event',
-                      action='remove_event')
-            m.connect('getinvolved_new_event',
-                      '/ckan-admin/getinvolved_new_event',
-                      action='new_event')
-            m.connect('getinvolved_edit_event',
-                      '/ckan-admin/getinvolved_edit_event',
-                      action='edit_event')
-            m.connect('getinvolved_volunteering_remove',
-                      '/ckan-admin/getinvolved_remove_volunteering',
-                      action='remove_volunteering')
-            m.connect('getinvolved_new_volunteering',
-                      '/ckan-admin/getinvolved_new_volunteering',
-                      action='new_volunteering')
-            m.connect('getinvolved_edit_volunteering',
-                      '/ckan-admin/getinvolved_edit_volunteering',
-                      action='edit_volunteering')
-
-        with SubMapper(map, controller='ckanext.hack4laatd.controller:AdminController') as m: # noqa
-            m.connect('download_terms_sources_csv', '/ckan-admin/terms-sources-csv', action='download_terms_sources_csv')
-
-        # Redirects
-        map.redirect('/story', '/dataset?type_label=Story',
-                     _redirect_code='301 Moved Permanently')
-        map.redirect('/why-la-counts', '/about',
-                     _redirect_code='301 Moved Permanently')
-        map.redirect('/faq', '/faqs',
-                     _redirect_code='301 Moved Permanently')
-        # It adds a query parameter `id` like `dataset?id=32423`
-        #  map.redirect('/catalog/{id}', '/dataset',
-                     #  _redirect_code='301 Moved Permanently')
-        with SubMapper(map, controller='ckanext.hack4laatd.controller:RedirectController') as m: # noqa
-            m.connect('redirect_catalog', '/catalog/{id}', action='redirect_url', url='/dataset')
-
-        return map
+        return [blueprint]
 
     # IFacets
 

@@ -1,14 +1,18 @@
-hack4laatd-js:
+accessthedata-js:
   filter: rjsmin
-  output: ckanext-hack4laatd/%(version)s-hack4laatd.js
+  output: accessthedata/%(version)s_accessthedata.js
   contents:
-    - src/js/*
+    - theme.js
+    - home.js
+    - editable.js
+    - bubblechart.js
   extra:
     preload:
       - base/main
 
-hack4laatd-css:
+accessthedata-css:
   filter: cssrewrite
-  output: ckanext-hack4laatd/%(version)s-hack4laatd.css
+  output: accessthedata/%(version)s_accessthedata.css
   contents:
-    - src/css/*
+    - theme.css
+    - editable.css

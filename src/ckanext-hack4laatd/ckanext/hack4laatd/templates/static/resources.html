@@ -1,0 +1,133 @@
+{% extends "page.html" %} {% import 'macros/editable.html' as editable with
+context %} {% block subtitle %}{{ _('Resources') }}{% endblock %} {% block
+breadcrumb_content %}
+<li class="active"></li>
+{% endblock %} {% block primary_content %} {% call
+editable.region('resources-primary') %}
+
+<h1>Resources</h1>
+
+<p>
+  Los Angeles County has a wealth of useful resources for learning about data
+  and working with it. Here are a few organizations and activities to get you
+  started helping to change LA County for the better.
+</p>
+
+<p>
+  Something missing? Let us know on the <a href="/contact">Contact Us</a> page.
+</p>
+
+<h2>LA Counts technical resources</h2>
+
+<ul>
+  <li>
+    <a href="https://github.com/la-counts" target="_blank"
+      >LA Counts’ github organization</a
+    >
+  </li>
+  <li>
+    <a href="https://docs.ckan.org/en/2.8/contents.html" target="_blank"
+      >CKAN’s master documentation</a
+    >
+    <ul>
+      <li>
+        <a href="https://docs.ckan.org/en/2.8/api/index.html" target="_blank"
+          >Dataset API queries</a
+        >
+      </li>
+    </ul>
+  </li>
+  <li><a href="/faqs#datasets">Metadata</a></li>
+</ul>
+
+<h2>Free Data Analysis and Visualization Tools</h2>
+
+<ul>
+  <li>
+    ArcGIS Online -
+    <a
+      href="https://learn.arcgis.com/en/projects/get-started-with-arcgis-online/"
+      target="_blank"
+      >Getting Started</a
+    >
+  </li>
+  <li><a href="https://databasic.io" target="_blank">Databasic.io</a></li>
+  <li>
+    <a href="https://github.com/d3/d3/wiki/tutorials" target="_blank"
+      >D3 Tutorial</a
+    >
+  </li>
+  <li>
+    <a
+      href="https://beta.observablehq.com/collection/@observablehq/tutorial"
+      target="_blank"
+      >Observable Tutorials</a
+    >
+  </li>
+  <li><a href="https://github.com/" target="_blank">GitHub</a></li>
+  <li><a href="http://jupyter.org/" target="_blank">Jupyter</a></li>
+  <li>
+    <a href="https://www.tableau.com/learn/training" target="_blank">Tableau</a>
+  </li>
+  <li>R</li>
+  <li>
+    QGIS -
+    <a
+      href="https://www.qgistutorials.com/en/docs/making_a_map.htm"
+      target="_blank"
+      >Making A Map</a
+    >
+  </li>
+</ul>
+
+<h2>Data Tutorials and Learning</h2>
+
+<ul>
+  <li>Codecademy Data Science</li>
+  <li>Coursera The Data Scientist’s Toolbox</li>
+  <li>Data Science Masters free self-study curriculum</li>
+  <li>NICAR-LEARN [Free video tutorials for a variety of analysis tools]</li>
+  <li>
+    Opportunity Insights’ public course Using Big Data to Solve Economic and
+    Social Problems
+  </li>
+</ul>
+
+<h2>Local, Public Data Communities</h2>
+
+<ul>
+  <li><a href="http://datadonuts.la/" target="_blank">Data + Donuts</a></li>
+  <li>DataKind LA (with link/OK from Will High)</li>
+  <li><a href="http://datascience.la/" target="_blank">DataScience LA</a></li>
+  <li>City of Los Angeles’ Open Data Literacy Program</li>
+  <li>
+    <a href="http://designanddata.org" target="_blank"
+      >Design and Data (Lex’s project)</a
+    >
+  </li>
+  <li>
+    <a href="https://groups.google.com/forum/#!forum/lacounts" target="_blank"
+      >LA Counts working groups</a
+    >
+  </li>
+  <li>
+    <a href="https://www.meetup.com/MaptimeLA/" target="_blank">Maptime LA</a>
+  </li>
+  <li>
+    <a href="https://www.meetup.com/rladies-la/" target="_blank"
+      >R-Ladies Los Angeles</a
+    >
+  </li>
+</ul>
+
+<h2>Other Public Data Communities</h2>
+
+<ul>
+  <li>CfA (Charlotte - data)</li>
+  <li>City Bureau</li>
+  <li>DDD</li>
+  <li>SF data school</li>
+  <li>WPRDC</li>
+</ul>
+
+{% endcall %} {% endblock %} {% block secondary %}{% endblock %}

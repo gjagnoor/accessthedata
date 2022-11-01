@@ -1,22 +1,33 @@
-{% ckan_extends %} {% set intro = g.site_intro_text %} {% import
-'macros/editable.html' as editable with context %} {% block scripts %} {{
-super() }} {% asset 'hack4laatd_theme/src/home.js' %} {% endblock %} {% block
-bodytag %} {{ super() }} class="home"{% endblock %} {% block content %}
+{% ckan_extends %}
+{% set intro = g.site_intro_text %}
+{% import 'macros/editable.html' as editable with context %}
+
+{% block scripts %}
+  {{ super() }}
+  {% asset 'accessthedata/accessthedata-js' %}
+{% endblock %}
+
+{% block bodytag %} {{ super() }} class="home"{% endblock %}
+{% block header %}
+  {% include "custom_header.html"%}
+{% endblock %}
+{% block content %}
 <section class="hero">
   <div class="images">
     <img id="BannerImage" alt="" />
   </div>
   <div class="container">
     {% call editable.region('hero-title') %}
-    <h1>Advocacy for data + Data for advocacy</h1>
-    {% endcall %} {% call editable.region('hero-text') %}
-    <p>
-      We're LA Counts, a tool for change powered by a community of advocates.
-      Together we collect, curate, and explore open data about Los Angeles
-      County and use it to improve the lives of all Angelenos. Explore the site,
-      learn from the community, and join our movement.
-    </p>
+      <h1>Advocacy for data + Data for advocacy</h1>
     {% endcall %}
+    {% call editable.region('hero-text') %}
+      <p>We're LA Counts, a tool for change powered by a community of advocates. Together we collect, curate, and explore open data about Los Angeles County and use it to improve the lives of all Angelenos. Explore the site, learn from the community, and join our movement.</p>
+    {% endcall %}
+    {% snippet 'home/snippets/search.html' %}
   </div>
 </section>
-{{ super() }} {% endblock %}
+{% endblock %}
+{% block footer %}
+  {% include "custom_footer.html" %}
+{% endblock %}
+

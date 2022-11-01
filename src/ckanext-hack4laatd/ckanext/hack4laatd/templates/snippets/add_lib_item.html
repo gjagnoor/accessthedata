@@ -1,0 +1,9 @@
+<div class="dropdown">
+  <a class="btn btn-primary" id="addPage" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+    <i class="fa fa-plus-square"></i> Add
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="addPage">
+    {{ h.snippet ('snippets/add_dataset.html', dataset_type=dataset_type) }}
+
+  </ul>
+</div>
