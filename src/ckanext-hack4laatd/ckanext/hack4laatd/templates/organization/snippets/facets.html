@@ -1,0 +1,31 @@
+<div id="publisher-search" class="module module-narrow module-shallow">
+  <h2 class="module-heading">
+    <i class="fa fa-info-circle"></i>
+    {{ _('Name') }}
+  </h2>
+  <div class="module-content">
+    <input class="search-input form-control" type="text" placeholder="{{ _('Search publishers')  }}">
+  </div>
+</div>
+
+<div id="publisher-filter" class="module module-narrow module-shallow">
+  <h2 class="module-heading">
+    <i class="fa fa-info-circle"></i>
+    {{ _('Type') }}
+  </h2>
+  <div class="module-content">
+    <ul class="filter-list list-unstyled nav nav-simple nav-facet">
+      {% for publisher_type in h.get_publisher_types() %}
+        {% if publisher_type.count %}
+          <li class="nav-item active">
+            <a class="filter-toggle" title="Toggle publishers type" data-publisher-type="{{ publisher_type.value }}">
+              <span class="item-label">{{ publisher_type.label }}</span>
+              <span class="hidden separator"> - </span>
+              <span class="item-count badge">{{ publisher_type.count }}</span>
+            </a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</div>
