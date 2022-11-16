@@ -1,0 +1,92 @@
+{% ckan_extends %}
+{% import 'macros/editable.html' as editable with context %}
+
+{% block bodytag %} {{ super() }} class="topic details"{% endblock %}
+
+{% block subtitle %}{{ c.group_dict.display_name }} - {{ _('Topics') }}{% endblock %}
+
+{% block breadcrumb_content %}
+  <li>{% link_for _('Topics'), controller='group', action='index', named_route=group_type + '_index' %}</li>
+  <li class="active">{% link_for c.group_dict.display_name|truncate(35), controller='group', action='read', id=c.group_dict.name, named_route=group_type + '_read' %}</li>
+{% endblock %}
+
+{% block primary_content %}
+  {% block heading %}
+  {% snippet 'snippets/connectivity.html' %}
+  <h1 class="heading">
+    {{ c.group.display_name }}
+    {% if c.group.state == 'deleted' %}
+      [{{ _('Deleted') }}]
+    {% endif %}
+  </h1>
+  {% endblock %}
+  {% block description %}
+  {% if c.group.description %}
+  <div class="notes">
+    {{ h.render_markdown(c.group.description) }}
+  </div>
+  {% endif %}
+  {% endblock %}
+
+  {% block page_header %}{% endblock %}
+
+  <ul class="working-groups-list">
+    <li>
+      {% if c.group_dict.working_group_url %}
+        {% set link = c.group_dict.working_group_url %}
+        {% set text = _('Join group') %}
+      {% else %}
+        {% set link = 'https://groups.google.com/forum/#!forum/lacounts' %}
+        {% set text = _('Start group') %}
+      {% endif %}
+      <h3><a href="">{{ c.group.display_name }} working group</a></h3>
+      {% if c.group_dict.working_group_url %}
+        {% if c.group_dict.working_group_description %}
+          {{ h.render_markdown(c.group_dict.working_group_description) }}
+        {% endif %}
+      {% else %}
+        {% call editable.region('topic-start-working-group') %}
+          <p>Are you interested in this topic? Why don't start a working group to connect with others working on this field?</p>
+        {% endcall %}
+      {% endif %}
+      <a class="btn" href="">{{ text }}</a>
+    </li>
+  </ul>
+
+  {% set stories = h.get_featured_data_stories(topic_dict=c.group_dict, limit=4) %}
+  {% if stories %}
+    <section class="featured-list">
+      <h1>Featured Data Stories</h1>
+      {% snippet 'snippets/stories_list.html', stories=stories, showTextPreview=True %}
+      <a href="/dataset?groups={{ c.group.name }}&type_label=Story" class="explore-link">View all stories</a>
+    </section>
+  {% endif %}
+
+  {% set datasets = h.get_featured_datasets(topic_dict=c.group_dict) %}
+  {% if datasets %}
+    <section class="featured-list">
+      <h1>Featured Datasets</h1>
+      {{ h.snippet('snippets/package_list.html', packages=datasets) }}
+      <a href="" class="explore-link">View all datasets</a>
+    </section>
+  {% endif %}
+
+{% endblock %}
+
+{% block secondary %}
+  <aside class="secondary col-sm-3">
+
+    <div class="topics-menu">
+      {% set topics = h.get_topics(only_featured=True) %}
+      <ul>
+        {% for topic in topics %}
+          <li {% if topic.name == c.group_dict.name %}class="active"{% endif %}>
+            <a href="">{{ topic.title|upper }}</a>
+          </li>
+        {% endfor %}
+        <li class="see-all"><a href="/topic/">See all topics<i class="fa fa-arrow-right"></i></a></li>
+      </ul>
+    </div>
+
+  </aside>
+{% endblock %}

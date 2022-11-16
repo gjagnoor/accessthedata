@@ -1,0 +1,59 @@
+:root {
+  --yellow: #EFB80D;
+  --orange: #F37320;
+  --blue: #0B74AF;
+  --grey: #5B5E5E;
+  --green: #A7B638;
+  --red: #DA453F;
+  --yellow-orange: #F09006;
+  --dark-blue: #365872;
+  --primary-colour: var(--blue);
+  --secondary-colour: #6c757d;
+  --body-bg: #FFF;
+  --body-colour: var(--grey);
+  --heading-colour: var(--grey);
+  --link-colour: var(--blue);
+  --visited-link-colour: var(--dark-blue);
+  --heading-link-colour: #000;
+  --input-focus-colour: var(--yellow);
+  --success-colour: #4db53c;
+  --warning-colour: #e08833;
+  --info-colour: var(--orange);
+  --danger-colour: #db463f;
+  --border-colour: #dedfdf;
+  --shadow: 0px 0 2px 0px rgba(0,0,0,0.25);
+  --drop-shadow: 0px 2px 2px 0px rgba(0,0,0,0.25);
+
+  --education-colour: var(--orange);
+  --environment-colour: var(--green);
+  --housing-colour: var(--red);
+  --immigration-colour: var(--yellow);
+  --transportation-colour: var(--yellow-orange);
+  --well-being-colour: var(--blue);
+
+  --font-family-base: 'Lato', sans-serif;
+
+  --user-bar-height: 38px;
+  --header-height-small: 76px;
+  --header-height-medium: 100px;
+  --header-height-large: 126px;
+
+  --search-height-small: 68px;
+  --search-height-medium: 76px;
+  --search-height-large: 86px;
+
+  --container-padding: 2.5rem;
+  --border-radius: 3px;
+  --spacer-15: 0.8rem;
+  --spacer-25: 1.2rem;
+  --spacer-35: 1.6rem;
+  --spacer-50: 2.4rem;
+  --spacer-75: 3.8rem;
+
+  --font-size-xsmall: 11px;
+  --font-size-small: 16px;
+  --font-size-medium: 18px;
+
+  --format-icon-width: 30px;
+  --format-icon-height: 33px;
+}
