@@ -50,9 +50,9 @@ class Hack4LaatdPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     # IConfigurer
 
-    def update_config(self, config_):
-        toolkit.add_template_directory(config_, 'templates')
-        toolkit.add_public_directory(config_, 'public')
+    def update_config(self, config):
+        toolkit.add_template_directory(config, 'templates')
+        toolkit.add_public_directory(config, 'public')
         toolkit.add_resource('assets', 'accessthedata')
     
     def update_config_schema(self, schema):
@@ -130,7 +130,7 @@ class Hack4LaatdPlugin(plugins.SingletonPlugin, DefaultTranslation):
             ('/privacy', 'privacy', privacypolicy),
             ('/terms', 'termsofservice', termsofservice),
             ('/faqs', 'faqs', faqs),
-            ('/aboutus', 'aboutus', aboutus),
+            ('/about', 'about', aboutus),
             ('/resources', 'resources', resources),
         ]
         for rule in rules:
