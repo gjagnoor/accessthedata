@@ -1,0 +1,7 @@
+{% if data.get(field.field_name) %}
+  {% if '@' in data[field.field_name] %}
+    <a href="">{{ data[field.field_name] }}</a>
+  {% else %}
+    data[field.field_name]
+  {% endif %}
+{% endif %}
