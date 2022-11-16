@@ -1,0 +1,220 @@
+html {
+  scroll-behavior: smooth;
+}
+
+.container {
+  width: 100%;
+  max-width: 1300px;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+.site-search {
+  margin-bottom: 1rem;
+
+  & .form-control {
+    font-size: 1.5em;
+    padding-right: 2.7em;
+  }
+
+  & .field .btn-search {
+    outline: none;
+    width: 2em;
+    height: 2em;
+    font-size: 1.8em;
+    margin-top: -1em;
+    right: 0.1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (--small-up) {
+    margin-bottom: 2rem;
+  }
+
+  &.pinned {
+    @mixin extend-full-width var(--grey);
+  }
+}
+
+.masthead + .site-search,
+.site-search.pinned {
+  font-size: 0.7em;
+  padding-bottom: var(--spacer-25);
+
+  & .form-control {
+    margin-top: 2px;
+
+    &:not(:focus) {
+      border-color: #fff;
+    }
+  }
+}
+
+.masthead + .site-search {
+  position: fixed;
+  background-color: var(--grey);
+  top: var(--header-height-small);
+  width: 100%;
+  z-index: 99;
+  padding-bottom: 0;
+  height: var(--search-height-small);
+
+  @media (--medium-up) {
+    height: var(--search-height-medium);
+  }
+
+  @media (--large-up) {
+    height: var(--search-height-large);
+  }
+
+  & .btn-search {
+    padding-top: 2px;
+    margin-right: var(--container-padding);
+  }
+
+  @media (--medium-up) {
+    top: var(--header-height-medium);
+  }
+
+  @nest .logged-in & {
+    top: calc(var(--header-height-small) + var(--user-bar-height));
+
+    @media (--medium-up) {
+      top: calc(var(--header-height-medium) + var(--user-bar-height));
+    }
+  }
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: calc(var(--header-height-small) + var(--search-height-small));
+
+  &.logged-in {
+    padding-top: calc(var(--header-height-small) + var(--user-bar-height) + var(--search-height-small));
+  }
+
+  @media (--medium-up) {
+    padding-top: calc(var(--header-height-medium) + var(--search-height-medium));
+
+    &.logged-in {
+      padding-top: calc(var(--header-height-medium) + var(--user-bar-height) + var(--search-height-medium));
+    }
+  }
+  @media (--large-up) {
+    padding-top: calc(var(--header-height-medium) + var(--search-height-large));
+
+    &.logged-in {
+      padding-top: calc(var(--header-height-medium) + var(--user-bar-height) + var(--search-height-large));
+    }
+  }
+
+  &.active-search {
+    @media (--small-up) {
+      height: 100vh;
+      overflow: hidden;
+    }
+  }
+}
+
+[role="main"],
+.homepage {
+  flex-grow: 1;
+}
+
+[role=main] {
+  margin-top: var(--spacer-35);
+  padding-bottom: var(--spacer-15);
+
+  @media (--small-only) {
+    padding-bottom: var(--spacer-35);
+  }
+
+  & .wrapper {
+    margin-left: 0;
+    margin-right: 0;
+
+    &::before {
+      display: none;
+    }
+
+    &.no-nav {
+      & .primary {
+        width: 100%;
+        padding-left: 0;
+      }
+      & .secondary {
+        display: none;
+      }
+    }
+  }
+
+  & .primary {
+    padding-left: 0;
+    padding-right: 0;
+
+    @media (--small-only) {
+      float: none; /* was being floated at xs for some reason */
+    }
+
+    @media (--small-up) {
+      padding-left: var(--spacer-50);
+    }
+
+    & .module-content {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  & .secondary {
+    font-size: 0.85em;
+    margin-top: var(--spacer-15);
+  }
+}
+
+.primary-secondary {
+  @media (--small-up) {
+    & .primary {
+      float: left;
+      padding-left: 0;
+      padding-right: var(--spacer-50);
+    }
+    & .secondary {
+      float: right;
+    }
+  }
+}
+
+.wrapper > .connectivity,
+.primary .connectivity {
+  display: none;
+
+  & .btn {
+    margin-right: var(--spacer-15);
+    margin-top: var(--spacer-15);
+    font-size: var(--font-size-small);
+  }
+
+  & .dropdown-menu {
+    left: auto;
+    right: 0;
+  }
+
+  @media (--small-up) {
+    display: flex;
+    float: right;
+
+    & .btn {
+      margin-left: var(--spacer-15);
+      margin-right: 0;
+    }
+  }
+}
+
+.dsq-brlink {
+  display: none;
+}

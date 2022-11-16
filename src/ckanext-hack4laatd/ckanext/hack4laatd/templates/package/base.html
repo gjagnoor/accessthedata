@@ -1,0 +1,20 @@
+{% ckan_extends %}
+
+{% block subtitle %}{{ _('Library') }}{% endblock %}
+
+{% block breadcrumb_content %}
+  {% if pkg %}
+    {% set dataset = h.dataset_display_name(pkg) %}
+    {% if pkg.organization %}
+      {% set group_type = pkg.organization.type %}
+      <li>{% link_for _('Publishers'), named_route=group_type + '_index' %}</li>
+      <li>{% link_for h.get_organization_display_title(pkg.organization)|truncate(30), id=pkg.organization.name, named_route=group_type + '_read' %}</li>
+    {% else %}
+      <li>{% link_for _('Library'), named_route='dataset_search' %}</li>
+    {% endif %}
+    <li{{ self.breadcrumb_content_selected() }}>{% link_for dataset|truncate(30), named_route='dataset_read', id=pkg.name %}</li>
+  {% else %}
+    <li>{% link_for _('Library'), named_route='dataset_search' %}</li>
+    <li class="active"><a href="">{{ _('Create Dataset') }}</a></li>
+  {% endif %}
+{% endblock %}
