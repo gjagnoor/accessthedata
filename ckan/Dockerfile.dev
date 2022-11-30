@@ -11,6 +11,8 @@ RUN echo $TZ > /etc/timezone
 # (Make sure to add the plugins to CKAN__PLUGINS in the .env file)
 # For instance:
 RUN echo "installing plugins" && \
+    # paste
+    pip install -e git+https://github.com/cdent/paste.git#egg=paste && \
     # scheming
     pip install -e git+https://github.com/ckan/ckanext-scheming.git#egg=ckanext-scheming && \
     # harvest
