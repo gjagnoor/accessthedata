@@ -8,6 +8,23 @@ from ckanext.hack4laatd import helpers, validators, jobs
 from ckanext.hack4laatd.logic import actions, auth
 from flask import Blueprint
 
+# import logging
+from ckan import model
+# from ckan.plugins import toolkit
+# import ckan.lib.navl.dictization_functions as dict_fns
+# import ckan.logic as logic
+
+# from ckanext.showcase.controller import ShowcaseController
+
+# from ckanext.hack4laatd.admin import create_topics_csv
+
+# log = logging.getLogger(__name__)
+# _ = toolkit._
+
+# tuplize_dict = logic.tuplize_dict
+# clean_dict = logic.clean_dict
+# parse_params = logic.parse_params
+
 def redirect_url(url):
     return toolkit.redirect_to(url)
 
@@ -34,7 +51,24 @@ def privacypolicy():
 def resources():
     return toolkit.render('static/resources.html')
 
+def search():
+    posts = []
+    context = {'model': model}
+    showcases = toolkit.get_action('ckanext_showcase_list')(context, {})
+    for showcase in showcases:
+        showcase = \
+            toolkit.get_action('package_show')(context,
+                                                {'id': showcase['id']})
+        if showcase.get('story_type') == 'Blog Post':
+            posts.append(showcase)
+    return toolkit.render(_search_template('blog'),
+                            extra_vars={'posts': posts})
 
+def _search_template(package_type):
+    return 'blog/search.html'
+
+def _read_template():
+    return 'blog/read.html'
 
 class Hack4LaatdPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IConfigurer)
@@ -132,6 +166,8 @@ class Hack4LaatdPlugin(plugins.SingletonPlugin, DefaultTranslation):
             ('/faqs', 'faqs', faqs),
             ('/about', 'about', aboutus),
             ('/resources', 'resources', resources),
+            ('/blog', 'blog_search', search),
+            ('/blog/{id}', 'blog_read', _read_template),
         ]
         for rule in rules:
             blueprint.add_url_rule(*rule)
