@@ -1,0 +1,57 @@
+{% extends 'custom_page.html' %}
+
+{%- block subtitle %}Blog{% endblock -%}
+
+{% block bodytag %} {{ super() }} class="blog"{% endblock %}
+
+{% block breadcrumb_content %}
+  <li><a href="{{ h.url_for('blog_search') }}">{{ _('Blog') }}</a></li>
+{% endblock %}
+
+{% block primary %}
+{% snippet 'snippets/connectivity.html' %}
+<h1>{{ _('LA Counts news') }}</h1>
+<ul class="post-list">
+  {% for post in posts %}
+    <li>
+      <article>
+        <h1><a href="{{ h.url_for('blog_read', id=post.name) }}">{{ post.title }}</a></h1>
+        <div>
+          {% if post.image_display_url %}
+            <figure class="feature-image">
+              <img src="{{ post.image_display_url }}" alt="">
+            </figure>
+          {% endif %}
+
+          <div class="text">
+            {{ h.markdown_extract(post.notes, extract_length=900) }}
+            <a href="{{ h.url_for('blog_read', id=post.name) }}" class="more">{{ _('Read more') }}</a>
+
+            {% if post.groups %}
+              <div class="topics">
+                <ul class="tag-list">
+                  {% for topic in post.groups %}
+                    <li class="{{ topic.name }}">
+                      <a class="tag" href="{{ h.url_for('topic_read', id=topic.name) }}">{{ topic.display_name }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+
+          </div>
+        </div>
+      </article>
+    </li>
+  {% endfor %}
+</div>
+{% endblock %}
+
+{% block footer %}
+  {% if h.check_access('ckanext_showcase_create') %}
+    <div class="admin-page-actions">
+      {% link_for _('Add Blog Post'), named_route='story/new', class_='btn btn-primary', icon='plus-square' %}
+    </div>
+  {% endif %}
+  {{ super() }}
+{% endblock %}
