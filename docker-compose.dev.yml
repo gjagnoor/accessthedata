@@ -9,6 +9,7 @@ services:
         - TZ=${TZ}
     env_file:
       - .env
+    platform: linux/amd64
     links:
       - db
       - solr
@@ -19,7 +20,6 @@ services:
     volumes:
       - ./src:/srv/app/src_extensions
       - ckan_storage:/var/lib/ckan
-    
 
   datapusher:
     container_name: datapusher
