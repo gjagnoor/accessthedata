@@ -1,0 +1,22 @@
+{% ckan_extends %}
+
+{% block image %}
+  {# h.get_image_for_group(group.name) #}
+{% endblock %}
+
+{% block heading %}{% endblock %}
+
+{% block description %}{% endblock %}
+
+{% block nums %}
+<div class="nums">
+  <dl>
+    <dt>{{ _('Followers') }}</dt>
+    <dd data-module="followers-counter" data-module-id="{{ group.id }}" data-module-num_followers="{{ group.num_followers }}">{{ h.SI_number_span(group.num_followers) }}</dd>
+  </dl>
+  <dl>
+    <dt>{{ _('Datasets/stories') }}</dt>
+    <dd>{{ h.SI_number_span(group.package_count) }}</dd>
+  </dl>
+</div>
+{% endblock %}

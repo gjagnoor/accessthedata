@@ -1,0 +1,82 @@
+{% ckan_extends %}
+{% import 'macros/editable.html' as editable with context %}
+
+{% block bodytag %} {{ super() }} class="publishers-index"{% endblock %}
+
+{% block subtitle %}{{ _('Publishers') }}{% endblock %}
+
+{% block breadcrumb_content %}
+  <li class="active">{% link_for _('Publishers'), named_route=group_type+'_index' %}</li>
+{% endblock %}
+
+{% block page_header %}
+  {% snippet 'snippets/connectivity.html' %}
+  <h1>{{ _('Publishers') }}</h1>
+
+  <div class="helper-info" id="libraryHelper">
+    <h4 class="header"><span class="sr-only">What is this</span>?</h4>
+    <div class="content">
+      {% call editable.region('publishers-intro') %}
+      <p>
+        LA Counts' datasets are harvested from local, state, regional and federal agencies that maintain open data portals, as well as (eventually) private institutions. Together we’re working with the community to co-create universal dataset specifications and metadata standards for Los Angeles County.
+      </p>
+      {% endcall %}
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block page_primary_action %}
+{% endblock %}
+
+{% block organizations_search_form %}
+{% endblock %}
+
+{% block organizations_list %}
+  <a class="show-filters btn btn-default">{{ _('Filter Results') }}</a>
+  {% if c.page.items or request.params %}
+    {% if c.page.items %}
+      {% snippet "organization/snippets/organization_list.html", organizations=c.page.items %}
+    {% endif %}
+
+    <section class="featured-visualisation">
+
+      <svg id='svg-legend' width="140" height="160" font-size="14" text-anchor="middle" viewBox="0 0 140 160" preserveAspectRatio="xMidYMid meet"></svg>
+      <svg id='svg-viz' width="860" height="650" font-size="14" text-anchor="middle" style="width: 100%" viewBox="0 0 860 650" preserveAspectRatio="xMidYMid meet"></svg>
+      <script type="text/javascript">
+        var rows = {{ h.get_bubble_rows()|safe }};
+      </script>
+      {% resource 'lacounts/bubble' %}
+
+    </section>
+
+
+  {% else %}
+    <p class="empty">
+      {{ _('There are currently no organizations for this site') }}.
+      {% if h.check_access('organization_create') %}
+        {% link_for _('How about creating one?'), named_route=group_type+'_new' %}</a>.
+      {% endif %}
+    </p>
+  {% endif %}
+{% endblock %}
+
+{% block secondary_content %}
+  <div class="filters">
+    <div>
+      {% snippet "organization/snippets/facets.html" %}
+    </div>
+    <a class="close no-text hide-filters"><i class="fa fa-times-circle"></i><span class="text">close</span></a>
+  </div>
+{% endblock %}
+
+{% block footer %}
+  {% if h.check_access('organization_create') %}
+    <div class="admin-page-actions">
+      <a class="btn btn-primary" href="/publisher/new">
+        <i class="fa fa-plus-square"></i> Add Publisher
+      </a>
+    </div>
+  {% endif %}
+  {{ super() }}
+{% endblock %}

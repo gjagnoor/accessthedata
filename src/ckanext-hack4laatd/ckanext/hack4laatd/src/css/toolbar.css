@@ -1,0 +1,55 @@
+.toolbar {
+  display: none;
+  margin-bottom: var(--spacer-15);
+
+  & .breadcrumb {
+    font-style: italic;
+    font-size: 1em;
+    color: var(--grey);
+    float: none;
+
+    & a {
+      color: inherit;
+    }
+
+    & .home {
+      & i {
+        display: none;
+      }
+      & span {
+        display: inline-block;
+      }
+    }
+  }
+
+  & > div {
+    display: flex;
+
+    & > div {
+      margin-left: var(--spacer-15);
+      margin-right: 0;
+    }
+  }
+
+  & .btn {
+    font-size: 16px;
+  }
+
+  @media (--small-up) {
+    display: flex;
+    align-items: center;
+
+    & .breadcrumb {
+      margin-right: auto;
+    }
+
+    & .btn {
+      font-size: 16px;
+    }
+
+    & .dropdown-menu {
+      left: auto;
+      right: 0;
+    }
+  }
+}

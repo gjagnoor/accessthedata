@@ -1,0 +1,97 @@
+{% ckan_extends %}
+
+{% block bodytag %} {{ super() }} class="resource"{% endblock %}
+
+{% block pre_primary %}{% endblock %}
+
+{% block primary_content %}
+  {% block resource %}
+    {{ super() }}
+  {% endblock %}
+  {% block resource_additional_information %}
+    {{ super() }}
+  {% endblock %}
+{% endblock %}
+
+{% block resource_actions %}{% endblock %}
+
+{% block resource_content %}
+  {% block resource_read_title %}<h1 class="page-heading">{{ h.resource_display_name(res) | truncate(50) }}</h1>{% endblock %}
+  {% block resource_read_url %}
+    {% if res.url and h.is_url(res.url) %}
+      <p class="text-muted ellipsis">{{ _('URL:') }} <a class="resource-url-analytics" href="" title="{{ res.url }}">{{ res.url }}</a></p>
+    {% elif res.url %}
+      <p class="text-muted break-word">{{ _('URL:') }} {{ res.url }}</p>
+    {% endif %}
+  {% endblock %}
+  <div class="prose notes" property="rdfs:label">
+    {% if res.description %}
+      {{ h.render_markdown(res.description) }}
+    {% endif %}
+    {% if not res.description and c.package.notes %}
+      <h3>{{ _('From the dataset description') }}</h3>
+      <blockquote>{{ h.markdown_extract(h.get_translated(c.package, 'notes')) }}</blockquote>
+      <p>{% trans dataset=c.package.title, url=h.url_for(controller='package', action='read', id=c.package['name']) %}Source: <a href="">{{ dataset }}</a>{% endtrans %}
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block secondary_content %}
+  <section class="publisher button-box">
+    <p>
+      {{ _('Published by') }}
+      <a href="{{ h.url_for('organization_read', id=pkg.organization.name) }}">
+        {{ h.get_organization_display_title(pkg.organization) }}
+      </a>
+    </p>
+
+    {% if res.url and h.is_url(res.url) %}
+      <a class="btn btn-primary resource-url-analytics resource-type-{{ res.resource_type }}" href="">
+          {% if res.resource_type in ('listing', 'service') %}
+            {{ _('View') }}
+          {% elif  res.resource_type == 'api' %}
+            {{ _('API Endpoint') }}
+          {% elif not res.has_views and not res.url_type == 'upload' %}
+            {{ _('Go to resource') }}
+          {% else %}
+            {{ _('Download') }}
+          {% endif %}
+      </a>
+      {% block download_resource_button %}
+        {%if res.datastore_active %}
+        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+          <span class="caret"></span>
+        </button>
+
+        <a href=""
+          target="_blank"><span>CSV</span></a>
+        <a href=""
+          target="_blank"><span>TSV</span></a>
+        <a href=""
+          target="_blank"><span>JSON</span></a>
+        <a href=""
+          target="_blank"><span>XML</span></a>
+        {%endif%}
+      {% endblock %}
+    {% endif %}
+  </section>
+
+
+  {% block resource_license %}
+    {{ super() }}
+  {% endblock %}
+
+  {% block resources_list %}
+    {{ super() }}
+  {% endblock %}
+
+{% endblock %}
+
+{% block footer %}
+  {% if h.check_access('package_update', {'id':pkg.id }) %}
+    <div class="admin-page-actions">
+      {% link_for _('Manage'), named_route='resource_edit', id=pkg.name, resource_id=res.id, class_='btn btn-default', icon='wrench' %}
+    </div>
+  {% endif %}
+  {{ super() }}
+{% endblock %}

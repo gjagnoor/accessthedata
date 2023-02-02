@@ -1,0 +1,161 @@
+{% extends "page.html" %}
+{% import 'macros/editable.html' as editable with context %}
+
+{% block bodytag %} {{ super() }} class="getinvolved"{% endblock %}
+
+{% block subtitle %}{{ _('Get Involved') }}{% endblock %}
+
+{% block breadcrumb_content %}
+  <li class="active">{% link_for _('Get Involved'), controller='ckanext.lacounts.controller:GetInvolvedController', action='getinvolved' %}</li>
+{% endblock %}
+
+{% block primary_content %}
+  {% call editable.region('get-involved') %}
+    <h1>See how people in LA are answering every day questions with open data!</h1>
+    <p>LA Counts is a growing community of open data practitioners, data journalists, academics, researchers, students, philanthropists, and policymakers. Get involved!</p>
+  {% endcall %}
+
+  <h2 id="working-groups">{{ _('Working groups') }}</h2>
+  {% call editable.region('get-involved-working-groups') %}
+  <p>When you join a working group you join a community of people working  with open data to investigate problems, explore equity opportunities, imagine new futures. You'll share your work publicly through various means: dataviz, stories, reports, policy recommendations, etc</p>
+  </p>
+  {% endcall %}
+
+  {% set working_groups = h.get_all_working_groups() %}
+
+  <ul class="working-groups-list">
+    {% for wg in working_groups %}
+        <li>
+            <h3>{{ wg['name'] }}</h3>
+            {% if wg.get('desc') %}
+              <p>
+              {{ h.render_markdown(wg['desc']) }}
+              </p>
+            {% endif %}
+            <a class="btn" href="">{{ _('Join group') }}</a>
+        </li>
+    {% endfor %}
+    <li>
+        {% call editable.region('get-involved-start-working-group') %}
+          <h3>Start a new one!</h3>
+          <p>
+            Are you involved or interested in a <a href="">topic</a> not shown here? Why not start a working group to connect with others?
+          </p>
+        {% endcall %}
+      <a class="btn" href="https://groups.google.com/forum/#!forum/lacounts">{{ _('Start group') }}</a>
+    </li>
+  </ul>
+
+  <h2 id="volunteering">{{ _('Volunteer opportunities') }}</h2>
+  {% call editable.region('get-involved-volunteering') %}
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam finibus odio sit amet turpis fermentum, in tempus mauris egestas.
+  </p>
+  {% endcall %}
+  {% if c.volunteering %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>{{ _('Contact') }}</th>
+        <th style="width: 50%">Organization</th>
+        <th style="width: 16%">{{ _('Date opened') }}</th>
+        <th style="width: 10%"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for opportunity in c.volunteering|sort(reverse=True, attribute='created_on') %}
+      <tr {% if opportunity.description %}class="hasDescription"{% endif %}>
+        <td>{% if opportunity.email_contact and opportunity.email %}<a href="">{{ opportunity.email_contact }}</a>{% elif opportunity.email_contact %}{{ opportunity.email_contact }}{% else %}<a href="">{{ opportunity.email }}</a>{% endif %}</td>
+        <td>{% if opportunity.url %}<a href="" target="_blank" rel="nofollow">{{ opportunity.organization }}</a>{% else %}{{ opportunity.organization }}{% endif %}</td>
+        <td>{{ h.render_datetime(opportunity.created_on, date_format="%b %d, %Y") }}</td>
+        <td class="toggle_description_cell">{% if opportunity.description %}
+          <button type="button" class="btn btn-xs toggle_description" data-target="op_description_{{ loop.index }}">More info <span class="caret"></span></button>
+        {% endif %}</td>
+      </tr>
+      {% if opportunity.description %}
+        <tr class="description_row">
+          <td></td>
+          <td colspan="3"><span class="description" id="op_description_{{ loop.index }}">{{ h.render_markdown(opportunity.description) }}</span></td>
+        </tr>
+      {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+    <p>{{ _('There are currently no volunteer opportunities.') }}</p>
+  {% endif %}
+
+
+  <h2 id="events">{{ _('Events') }}</h2>
+  {% call editable.region('get-involved-events') %}
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam finibus odio sit amet turpis fermentum, in tempus mauris egestas.
+  </p>
+  {% endcall %}
+  {% if c.events %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th style="width: 15%">{{ _('Date') }}</th>
+        <th style="width: 50%">{{ _('Event') }}</th>
+        <th>{{ _('Location') }}</th>
+        <th style="width: 10%"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for event in c.events|sort(reverse=False, attribute='date') %}
+      <tr {% if event.description %}class="hasDescription"{% endif %}>
+        <td>{{ h.render_datetime(event.date, date_format="%b %d, %Y") }}</td>
+        <td>{% if event.url %}<a href="" target="_blank" rel="nofollow">{{ event.name }}</a>{% else %}{{ event.name }}{% endif %}</td>
+        <td>{{ event.location }}</td>
+        <td class="toggle_description_cell">{% if event.description %}
+          <button type="button" class="btn btn-xs toggle_description" data-target="event_description_{{ loop.index }}">More info <span class="caret"></span></button>
+        {% endif %}</td>
+      </tr>
+      {% if event.description %}
+        <tr class="description_row">
+          <td></td>
+          <td colspan="3"><span class="description" id="event_description_{{ loop.index }}">{{ h.render_markdown(event.description) }}</span></td>
+        </tr>
+      {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+    <p>{{ _('There are currently no events.') }}</p>
+  {% endif %}
+
+{% endblock %}
+
+{% block secondary_content  %}
+<div class="aside-subnav-menu">
+  <ul class="">
+    <li>
+      <a href="#working-groups">Working groups</a>
+    </li>
+    <li>
+      <a href="#volunteering">Volunteer opportunities</a>
+    </li>
+    <li>
+      <a href="#events">Events</a>
+    </li>
+  </ul>
+</div>
+{% endblock %}
+
+{%- block footer %}
+  {% if h.check_access('ckanext_lacounts_event_create') %}
+    <div class="admin-page-actions">
+      <div class="dropdown">
+        <a class="btn btn-primary" id="addPage" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-plus-square"></i> Add
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="addPage">
+          {% link_for _('Add Volunteer opportunity'), controller='ckanext.lacounts.controller:GetInvolvedController', action='new_volunteering', class_='btn btn-primary', icon='plus-square' %}
+          {% link_for _('Add Event'), controller='ckanext.lacounts.controller:GetInvolvedController', action='new_event', class_='btn btn-primary', icon='plus-square' %}
+        </ul>
+      </div>
+    </div>
+  {% endif %}
+  {{ super() }}
+{% endblock %}
